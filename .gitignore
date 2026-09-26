@@ -9,7 +9,6 @@ test-results-browser/
 .history/
 .muse/
 .omc/
-!.omc/skills/
 .env
 .env.*
 !.env.example
@@ -22,3 +21,21 @@ blob-report/
 .idea/
 .vscode/
 .llmwiki/
+
+# Local assistant instructions and workspace state
+AGENTS.md
+CLAUDE.md
+.agents/
+.claude/
+.codex/
+.omx/
+
+# Internal research, historical validation, and superseded screenshots
+/docs/research/
+/docs/assets/
+/docs/COMPETITIVE_ANALYSIS.md
+/docs/COMPETITIVE_USABILITY_VALIDATION.md
+/docs/FINAL_POLISH_VALIDATION.md
+/docs/PERFORMANCE_UX_AUDIT.md
+/docs/REPORT_WORKFLOW_VALIDATION.md
+/docs/USER_JOURNEY_VALIDATION.md

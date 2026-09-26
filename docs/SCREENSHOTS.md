@@ -19,5 +19,3 @@ This uses installed Google Chrome, an isolated browser profile, a local static s
 | `edit-landing.png` | Open **Try the sample**, replace the landing-page headline |
 
 The English journey also checks that report print CSS and stable IDs survive saving, downloads reopen correctly, Korean preferences persist, cancelling a language switch preserves unsaved work, and blocked browser storage does not break the English editor. These checks cover browser behavior; they do not certify native OS file associations or physical mobile-device interaction.
-
-Earlier Korean screenshots under `docs/research/` remain historical validation evidence and are not the public README's product screenshots.

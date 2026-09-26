@@ -99,7 +99,7 @@ The compiled server has one direct runtime dependency, `parse5`. The static buil
 
 TypeScript removes types before execution; it does not make rendering faster by itself. Resource use depends on DOM work, layouts, copying, and loaded assets. Virtualizing the layer list does not bound the full iframe DOM or image memory. [Document limits](USAGE.md#supported-content-and-limits)
 
-The [performance and UX audit](PERFORMANCE_UX_AUDIT.md) measures the September 12 baseline with fresh browser contexts, normal/4× CPU profiles, synthetic documents, and explicit memory-scope limits. The [headed Chrome validation](USER_JOURNEY_VALIDATION.md) records the subsequent implementation of deferred marquee geometry, leaf-only original text, and camera scheduling, alongside interaction fixes. Removing unused worker response data remains a candidate. Worker execution is lazy, while its script is included in the service worker's initial offline precache.
+Worker execution is lazy, while its script is included in the service worker’s initial offline precache.
 
 ## Privacy, isolation, and offline behavior
 
@@ -139,9 +139,7 @@ PAGECRAFT_ASIDE_PATH='/Applications/Aside.app/Contents/MacOS/Aside' npm run test
 
 `npm run test:browser` builds the static app and runs `playwright.browser.config.ts`. Chromium, Firefox, and WebKit automation establish behavior in those test engines. They do not certify actual Safari, every Chromium derivative, iOS, Windows, or mobile touch UX. Native file-picker dialogs and shortcuts consumed by browser UI need separate manual checks.
 
-Local validation on September 12, 2026 after recovery and snapping: type/syntax checks, 29 unit/API tests, 146 Chrome/Aside folder-suite cases, and 2 bundled Chromium extension cases passed. The browser matrix and a targeted rerun of its four free-movement cases together produced 91 ordinary passes, 7 known Aside download failures, and 14 unsupported native-picker skips. The initial full run found four old free-drag coordinate assertions affected by snapping's new default; those cases now turn snapping off through the UI, while dedicated snapping tests verify the default behavior. Position and undo assertions were retained.
-
-The 7 Aside expected failures occur specifically at the Playwright Blob-download boundary, including an independently failing blank-page control. They are not evidence of successful Aside downloads. Native-save tests use real OPFS handles with a test picker, not OS dialogs. Firefox/WebKit skip unsupported native-file scenarios. Additional IndexedDB tests passed in Firefox and WebKit. Actual Safari/iOS, OS dialogs, and manual extension installation still need separate verification. [Matched headed Chrome comparison and evidence](COMPETITIVE_USABILITY_VALIDATION.md) records this change's actual pointer, text, recovery, and export/reopen journeys.
+Native-save tests use real OPFS handles with a test picker, not operating-system dialogs. Firefox and WebKit skip unsupported native-file scenarios. See the repository’s CI results for the current test matrix.
 
 Regression coverage should preserve source and style behavior, permission/cancellation outcomes, external-change conflicts, backup and download semantics, preview isolation, and offline reload. Existing folder tests cover source preservation, backups, path validation, selection, dragging, IME input, failure recovery, and narrow-window layouts. Performance checks use DOM bounds and mutation/request counts instead of fragile absolute timing limits.
 

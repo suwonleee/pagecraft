@@ -14,7 +14,7 @@ npm start -- /tmp/team-report.html
 ```
 
 1. In the browser, change the report title and save. Folder mode writes to the file passed above.
-2. Ask the coding agent: “Read AGENTS.md and docs/AI_EDITING.md. Inspect /tmp/team-report.html and update only the requested summary. Preserve my title, other content and IDs.”
+2. Ask the coding agent: “Read docs/AI_EDITING.md. Inspect /tmp/team-report.html and update only the requested summary. Preserve my title, other content and IDs.”
 3. The agent inspects, builds a patch, validates, and applies it using the commands below.
 4. Use **Reopen** (다시 열기), or the file list, to load the result. If you have additional unsaved work, keep a separate copy before deciding which changes to discard.
 5. Continue editing and save. Reinspect before the next agent patch because source-offset IDs and the document hash can change after every save.
@@ -110,4 +110,4 @@ The starter print styles help when printing downloaded HTML through a browser. T
 
 `e2e/report-collaboration.spec.ts` drives the actual folder editor and separate CLI processes. It verifies a human save invalidates an old agent patch, a new agent write invalidates the old browser save, and an explicit reload retains both contributors' saved text. It also verifies final save/reopen, unchanged CSS/comments, and exact-content backups in Chrome and Aside.
 
-This validates the provider-independent interface, not a separately launched Claude Code/Codex session or model quality. [Report workflow validation](REPORT_WORKFLOW_VALIDATION.md) records the browser paste/template tests, a headed Chrome handoff, and build-size costs.
+This validates the provider-independent interface, not a separately launched Claude Code/Codex session or model quality. Browser paste, templates, and export/reopen are covered by `e2e/browser-mode.spec.ts` and `e2e/english-ui.spec.ts`.

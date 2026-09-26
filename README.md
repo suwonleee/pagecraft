@@ -46,7 +46,7 @@ npm run --silent document -- inspect ./report.html --query weekly-summary-lead
 
 Ask your coding agent:
 
-> Read `AGENTS.md` and `docs/AI_EDITING.md`. Inspect `report.html`, shorten the executive summary, and preserve every other section, style, ID, and print rule. Validate the patch before writing it. Do not regenerate the document.
+> Read `docs/AI_EDITING.md`. Inspect `report.html`, shorten the executive summary, and preserve every other section, style, ID, and print rule. Validate the patch before writing it. Do not regenerate the document.
 
 The agent uses the returned hash and exact target in a JSON patch:
 
@@ -160,6 +160,6 @@ npm run build          # Server and CLI build
 
 Install browser test engines with `npx playwright install chromium firefox webkit`; the local Chromium suites use installed Chrome by default. Browser and extension builds share output, so run them sequentially.
 
-The README screenshots are captured from real UI interactions in [the English browser journey](e2e/english-ui.spec.ts). [Reproduce the screenshots](docs/SCREENSHOTS.md) · [Contributing and commit style](CONTRIBUTING.md) · [Historical validation notes](docs/ARCHITECTURE.md#tests-and-builds)
+The README screenshots are captured from real UI interactions in [the English browser journey](e2e/english-ui.spec.ts). [Reproduce the screenshots](docs/SCREENSHOTS.md) · [Contributing and commit style](CONTRIBUTING.md) · [Tests and builds](docs/ARCHITECTURE.md#tests-and-builds)
 
 [MIT licensed](LICENSE). No account required. No document upload service. Your HTML remains yours.

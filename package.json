@@ -1,0 +1,44 @@
+{
+  "name": "pagecraft",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A lightweight local visual HTML editor with source-preserving saves.",
+  "license": "MIT",
+  "author": "suwonleee",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suwonleee/pagecraft.git"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "document": "node --import tsx src/document-cli.ts",
+    "start": "node --import tsx src/main.ts",
+    "start:built": "node dist/main.js",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "check:browser": "node scripts/check-browser.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "check": "npm run typecheck && npm run check:browser && npm test",
+    "build:web": "node scripts/build-web.mjs",
+    "serve:web": "node --import tsx src/web-main.ts",
+    "test:browser": "npm run build:web && playwright test -c playwright.browser.config.ts",
+    "build:extension": "node scripts/build-extension.mjs",
+    "test:extension": "npm run build:extension && playwright test -c playwright.extension.config.ts"
+  },
+  "dependencies": {
+    "parse5": "^8.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@types/node": "^22.20.0",
+    "esbuild": "0.28.2",
+    "tsx": "^4.22.4",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.0"
+  }
+}

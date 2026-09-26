@@ -1,0 +1,20 @@
+{
+  "fixture": "welcome.html",
+  "sha256": "adcfb8869dbaa3b44c30d13e1d623f2e8d4da9a95610a87306184e327ef18873",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "actions": [
+    "import/open",
+    "title edit: 주말 계획을 직접 편집해 보세요.",
+    "move title",
+    "resize title",
+    "duplicate title",
+    "undo duplication",
+    "multiselect/align/distribute if available",
+    "save/export and reopen",
+    "reload recovery if available"
+  ],
+  "counting": "One click, double-click, completed drag, typing operation, keyboard chord, file selection or browser reload is one action; setup and read-only inspection excluded. Counts are observed paths, not time or minimum possible paths."
+}

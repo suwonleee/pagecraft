@@ -1,0 +1,150 @@
+{
+  "browser": "153.0.8010.36",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "importActions": 2,
+  "editActions": 4,
+  "selectionForDuplication": 1,
+  "duplicateActions": 1,
+  "undoActions": 1,
+  "initial": {
+    "text": "취향에 맞는 주말을 발견하세요.",
+    "width": 680,
+    "fontWeight": "650"
+  },
+  "weight": "650",
+  "duplicated": 2,
+  "afterUndo": 1,
+  "edited": "주말 계획을 직접 편집해 보세요.",
+  "layout": {
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "canvas": {
+      "x": 0,
+      "y": 187.5,
+      "width": 1000,
+      "height": 570,
+      "top": 187.5,
+      "right": 1000,
+      "bottom": 757.5,
+      "left": 0
+    },
+    "save": {
+      "x": 1154.359375,
+      "y": 13.5,
+      "width": 109.640625,
+      "height": 38,
+      "top": 13.5,
+      "right": 1264,
+      "bottom": 51.5,
+      "left": 1154.359375
+    }
+  },
+  "draft": "이 브라우저에 임시 보관됨 · 원본 파일 저장과 별개입니다.",
+  "move": {
+    "actions": 1,
+    "screenDelta": [
+      40,
+      25
+    ],
+    "translate": "61.017px 45.5px",
+    "bounds": {
+      "x": 304.0169982910156,
+      "y": 225.6953125,
+      "width": 680,
+      "height": 59.515625,
+      "top": 225.6953125,
+      "right": 984.0169982910156,
+      "bottom": 285.2109375,
+      "left": 304.0169982910156
+    }
+  },
+  "resize": {
+    "actions": 1,
+    "width": 581
+  },
+  "snapping": {
+    "guides": 2,
+    "translate": "0px 45.852px"
+  },
+  "multiselect": {
+    "actions": 2,
+    "selection": "2개 선택"
+  },
+  "alignment": {
+    "actions": 1,
+    "rightEdges": [
+      923,
+      923
+    ]
+  },
+  "recovery": {
+    "actions": 3,
+    "description": "reload + recovery list + named Restore",
+    "name": "welcome.recovered.html",
+    "heading": "주말 계획을 직접 편집해 보세요.",
+    "saveState": "복구한 사본 · 내려받기 전",
+    "saveEnabled": true,
+    "historyUndoAvailable": false
+  },
+  "export": {
+    "actions": 1,
+    "bytes": 4276,
+    "headingPreserved": true,
+    "commentPreserved": true,
+    "previewMarkersPresent": false
+  },
+  "reopen": {
+    "actions": 3,
+    "heading": "주말 계획을 직접 편집해 보세요."
+  },
+  "altBypass": {
+    "screenDelta": [
+      3,
+      8
+    ],
+    "enabled": {
+      "guides": 2,
+      "translate": "0px 16.094px"
+    },
+    "bypass": {
+      "guides": 0,
+      "translate": "4.576px 12.203px"
+    }
+  },
+  "small": {
+    "viewport": [
+      667,
+      375
+    ],
+    "scrollWidth": 667,
+    "canvas": {
+      "x": 0,
+      "y": 169.5,
+      "width": 667,
+      "height": 167,
+      "top": 169.5,
+      "right": 667,
+      "bottom": 336.5,
+      "left": 0
+    },
+    "draft": {
+      "x": 0,
+      "y": 144.5,
+      "width": 667,
+      "height": 25,
+      "top": 144.5,
+      "right": 667,
+      "bottom": 169.5,
+      "left": 0
+    }
+  },
+  "recoveryDialog": {
+    "x": 33.5,
+    "y": 46.203125,
+    "width": 600,
+    "height": 282.5859375
+  }
+}

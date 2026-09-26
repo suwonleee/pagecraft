@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Report editing pilot · Example decision brief</title>
+  <style>
+    *{box-sizing:border-box}html{color-scheme:light}body{margin:0;background:#f3f2f7;color:#292736;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.65;overflow-wrap:anywhere}.report{max-width:900px;margin:32px auto;padding:36px 44px 30px;background:#fff;border:1px solid #e5e2ec;border-radius:14px}.masthead,.meta,.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.masthead{padding-bottom:18px;border-bottom:1px solid #e8e5ee;align-items:center}.wordmark{font-size:12px;font-weight:700;letter-spacing:1.8px;color:#624da1}.badge{font-size:11px;color:#614c96;background:#f0ecf8;padding:4px 10px;border-radius:20px}.hero{padding:28px 0 22px}.eyebrow{margin:0 0 8px;font-size:11px;letter-spacing:1.2px;color:#746a89}h1{margin:0 0 12px;font-size:34px;line-height:1.25;letter-spacing:-1.1px;font-weight:700}.meta{justify-content:flex-start;gap:6px 24px;font-size:12px;color:#666173}.sample-note{margin:0;padding:11px 14px;background:#f8f7fa;border-left:3px solid #b9abcd;color:#625d70;font-size:12px}.section{margin-top:24px}h2{margin:0 0 12px;font-size:17px;line-height:1.4;letter-spacing:-.4px}h3{margin:0 0 7px;font-size:14px;line-height:1.45}p{margin:0 0 10px}.decision{padding:18px 20px;border:1px solid #ded5ee;border-radius:10px;background:#f8f5fc}.decision p:last-child{margin-bottom:0}.lead{font-size:17px;font-weight:600;line-height:1.5}.muted{color:#666173}.context-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.context-card{padding:15px 17px;border:1px solid #e5e2ec;border-radius:10px}.context-card p{margin-bottom:0;font-size:13px;color:#666173}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}caption{text-align:left;font-size:12px;color:#666173;margin-bottom:8px}th,td{padding:10px 12px;vertical-align:top;text-align:left;border-bottom:1px solid #e8e5ee}thead th{background:#f5f3f9;font-weight:600;color:#514765}th:first-child{width:24%}th:nth-child(2){width:34%}tbody th{font-weight:500}.proposed th,.proposed td{background:#faf8fd}.evidence{display:grid;gap:8px;margin:0;padding-left:20px}.evidence li{padding-left:3px}.uncertainty{margin-top:12px;padding:12px 15px;border:1px solid #e8e0d5;border-radius:8px;background:#fcfaf6;font-size:12px;color:#6a5d4a}.steps{display:grid;gap:8px;margin:0;padding-left:21px}.steps li{padding-left:3px}.footer{margin-top:28px;padding-top:14px;border-top:1px solid #e8e5ee;font-size:11px;color:#746c81}@media(max-width:600px){.report{margin:0;padding:25px 20px;border:0;border-radius:0}.hero{padding-top:24px}h1{font-size:28px}.context-grid{grid-template-columns:1fr}.decision{padding:16px}.lead{font-size:16px}th,td{padding:9px 7px}.footer{gap:5px}.meta{gap:4px 14px}}@page{size:A4;margin:15mm}@media print{html,body{background:#fff;font-size:10pt}.report{max-width:none;margin:0;padding:0;border:0;border-radius:0}.masthead{padding-bottom:10px}.hero{padding:19px 0 15px}h1{font-size:25pt}.section{margin-top:18px}.decision,.context-card,.uncertainty{border-radius:4px}.context-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}h2{font-size:13pt;break-after:avoid}h3{break-after:avoid}.decision,.context-card,tr,.uncertainty{break-inside:avoid}table{font-size:9pt}thead{display:table-header-group}th,td{padding:8px}.footer{margin-top:18px}.sample-note{font-size:9pt}.lead{font-size:12pt}}
+  </style>
+</head>
+<body>
+  <!-- Fictional decision brief. Proposed outcomes are hypotheses, not measured results. -->
+  <main class="report" id="decision-brief">
+    <header class="masthead" id="decision-header">
+      <span class="wordmark" id="decision-wordmark">TEAM NOTES</span>
+      <span class="badge" id="decision-status">Example · Pending approval</span>
+    </header>
+    <div class="hero" id="decision-hero">
+      <p class="eyebrow" id="decision-eyebrow">DECISION BRIEF</p>
+      <h1 id="decision-title">A better way to edit reports</h1>
+      <div class="meta" id="decision-meta">
+        <span id="decision-owner">Proposed by: [team · owner]</span>
+        <span id="decision-approver">Reviewer: [decision-maker]</span>
+        <span id="decision-date">Decision due: [date]</span>
+      </div>
+    </div>
+    <p class="sample-note" id="decision-example-note">Fictional example. Expected benefits are untested assumptions. Replace [placeholders] and example text with verified material before sharing.</p>
+    <section class="section decision" id="decision-proposal" aria-labelledby="decision-proposal-title">
+      <h2 id="decision-proposal-title">01 Decision requested</h2>
+      <p class="lead" id="decision-proposal-lead">Start with a small, focused pilot.</p>
+      <p id="decision-proposal-detail">Trial [report type] with [team] for [duration]. Decide whether to expand after measuring task time and verifying saved output.</p>
+      <p class="muted" id="decision-proposal-approval">Approval requested: pilot scope, owner, and evaluation criteria</p>
+    </section>
+    <section class="section" id="decision-context" aria-labelledby="decision-context-title">
+      <h2 id="decision-context-title">02 Context and constraints</h2>
+      <div class="context-grid" id="decision-context-cards">
+        <article class="context-card" id="decision-context-problem"><h3 id="decision-problem-title">The problem to solve</h3><p id="decision-problem-detail">Explore how to reduce repeated work when editing the text and layout of HTML reports. Current task time: [measurement needed].</p></article>
+        <article class="context-card" id="decision-context-constraints"><h3 id="decision-constraints-title">What must stay true</h3><p id="decision-constraints-detail">Preserve source material and verify the saved HTML by reopening it. Cost and operational ownership: [to confirm].</p></article>
+      </div>
+    </section>
+    <section class="section" id="decision-options" aria-labelledby="decision-options-title">
+      <h2 id="decision-options-title">03 Compare the options</h2>
+      <table id="decision-options-table">
+        <caption id="decision-options-caption">Separate expected benefits from the conditions that need checking.</caption>
+        <thead><tr id="decision-options-head"><th scope="col" id="decision-col-option">Option</th><th scope="col" id="decision-col-effect">Expected benefit · Unverified</th><th scope="col" id="decision-col-condition">What to check</th></tr></thead>
+        <tbody>
+          <tr id="decision-option-current"><th scope="row" id="decision-current-name">Keep the current process</th><td id="decision-current-effect">No change to existing workflows</td><td id="decision-current-condition">Cost and friction of repeated edits</td></tr>
+          <tr class="proposed" id="decision-option-pilot"><th scope="row" id="decision-pilot-name">Small pilot · Recommended</th><td id="decision-pilot-effect">Evaluate suitability with real reports</td><td id="decision-pilot-condition">Documents, owner, and exit criteria</td></tr>
+          <tr id="decision-option-rollout"><th scope="row" id="decision-rollout-name">Roll out to every team</th><td id="decision-rollout-effect">A shared report editing workflow</td><td id="decision-rollout-condition">Document compatibility, training, and support cost</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="section" id="decision-evidence" aria-labelledby="decision-evidence-title">
+      <h2 id="decision-evidence-title">04 Evidence and unknowns</h2>
+      <ul class="evidence" id="decision-evidence-list">
+        <li id="decision-evidence-time">Current task time: [measurement · task · date · source]</li>
+        <li id="decision-evidence-users">User observations: [participant count · problem · source notes]</li>
+        <li id="decision-evidence-compatibility">Document compatibility: [HTML files tested · acceptance criteria · results]</li>
+      </ul>
+      <p class="uncertainty" id="decision-uncertainty">Still unknown: time saved, total adoption cost, and editing limits for unusual documents. Do not claim benefits before collecting evidence.</p>
+    </section>
+    <section class="section" id="decision-next-steps" aria-labelledby="decision-next-title">
+      <h2 id="decision-next-title">05 After approval</h2>
+      <ol class="steps" id="decision-next-list">
+        <li id="decision-next-scope">[Owner · deadline] Select pilot reports and a location for the original files.</li>
+        <li id="decision-next-measure">[Owner · deadline] Compare editing time and saved output for the same task.</li>
+        <li id="decision-next-review">[Reviewer · date] Review the results and choose to expand, improve, or stop.</li>
+      </ol>
+    </section>
+    <footer class="footer" id="decision-footer"><span id="decision-footer-team">[Team name] · Decision draft</span><span id="decision-footer-record">Final decision: [outcome · date]</span></footer>
+  </main>
+</body>
+</html>

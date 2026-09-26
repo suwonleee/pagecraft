@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      # build:extension runs build:web first, so both packages come from one build.
+      - run: npm run build:extension
+      - name: Package browser app and extension
+        run: |
+          set -eu
+          version="${GITHUB_REF_NAME}"
+          cat > web-dist/HOW-TO-RUN.txt <<'TXT'
+          Pagecraft browser app
+
+          Serve this folder over http(s); opening index.html directly (file://)
+          does not work because browsers block ES modules and workers there.
+
+            npx serve .                # or
+            python3 -m http.server 8000
+
+          Then open the printed address in your browser. Direct saving into the
+          opened file needs a Chromium-based browser and https or localhost;
+          other browsers download an edited copy.
+          TXT
+          (cd web-dist && zip -qr "../pagecraft-web-${version}.zip" .)
+          (cd extension-dist && zip -qr "../pagecraft-extension-${version}.zip" .)
+          ls -l pagecraft-*.zip
+      - name: Publish GitHub release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # A release drafted in the GitHub UI already exists when its tag lands here;
+        # a tag pushed from the CLI has no release yet. Both end with the same assets.
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" pagecraft-web-*.zip pagecraft-extension-*.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" pagecraft-web-*.zip pagecraft-extension-*.zip \
+              --title "Pagecraft $GITHUB_REF_NAME" --generate-notes \
+              --notes "pagecraft-web: static browser app, serve over http(s) (see HOW-TO-RUN.txt). pagecraft-extension: unpacked Manifest V3 package for Chrome developer mode."
+          fi
+      - uses: actions/upload-artifact@v7
+        if: github.ref_type != 'tag'
+        with:
+          name: pagecraft-release-packages
+          path: pagecraft-*.zip
+          retention-days: 14

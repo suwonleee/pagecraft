@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>제품 운영 주간 보고 · 작성 예시</title>
+  <style>
+    *{box-sizing:border-box}html{color-scheme:light}body{margin:0;background:#f3f2f7;color:#292736;font-family:'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-size:14px;line-height:1.65;overflow-wrap:anywhere}.report{max-width:900px;margin:32px auto;padding:36px 44px 30px;background:#fff;border:1px solid #e5e2ec;border-radius:14px}.masthead,.meta,.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.masthead{padding-bottom:18px;border-bottom:1px solid #e8e5ee;align-items:center}.wordmark{font-size:12px;font-weight:700;letter-spacing:1.8px;color:#624da1}.badge{font-size:11px;color:#614c96;background:#f0ecf8;padding:4px 10px;border-radius:20px}.hero{padding:28px 0 22px}.eyebrow{margin:0 0 8px;font-size:11px;letter-spacing:1.2px;color:#746a89}h1{margin:0 0 12px;font-size:34px;line-height:1.25;letter-spacing:-1.1px;font-weight:700}.meta{justify-content:flex-start;gap:6px 24px;font-size:12px;color:#666173}.sample-note{margin:0;padding:11px 14px;background:#f8f7fa;border-left:3px solid #b9abcd;color:#625d70;font-size:12px}.section{margin-top:24px}h2{margin:0 0 12px;font-size:17px;line-height:1.4;letter-spacing:-.4px}h3{margin:0 0 7px;font-size:14px;line-height:1.45}p{margin:0 0 10px}.summary{padding:18px 20px;border:1px solid #ded5ee;border-radius:10px;background:#f8f5fc}.summary p:last-child{margin-bottom:0}.lead{font-size:17px;font-weight:600;line-height:1.5}.muted{color:#666173}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}.metric{padding:15px 16px;border:1px solid #e5e2ec;border-radius:10px}.metric-label{font-size:12px;color:#666173;margin-bottom:8px}.metric-value{font-size:23px;line-height:1.3;font-weight:650;color:#624da1;margin-bottom:5px}.metric-note{font-size:11px;color:#716a7e;margin-bottom:0}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}caption{text-align:left;font-size:12px;color:#666173;margin-bottom:8px}th,td{padding:10px 12px;vertical-align:top;text-align:left;border-bottom:1px solid #e8e5ee}thead th{background:#f5f3f9;font-weight:600;color:#514765}th:first-child{width:24%}th:nth-child(2){width:35%}tbody th{font-weight:500}.risk{padding:15px 17px;border:1px solid #e8e0d5;border-radius:10px;background:#fcfaf6}.risk p:last-child{margin-bottom:0}.steps{display:grid;gap:8px;margin:0;padding-left:21px}.steps li{padding-left:3px}.footer{margin-top:28px;padding-top:14px;border-top:1px solid #e8e5ee;font-size:11px;color:#746c81}@media(max-width:600px){.report{margin:0;padding:25px 20px;border:0;border-radius:0}.hero{padding-top:24px}h1{font-size:28px}.metrics{grid-template-columns:1fr}.metric{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 12px}.metric-label{margin:0}.metric-value{font-size:21px;margin:0;grid-column:2;grid-row:1/3}.metric-note{grid-column:1}.summary{padding:16px}.lead{font-size:16px}th,td{padding:9px 7px}.footer{gap:5px}.meta{gap:4px 14px}}@page{size:A4;margin:15mm}@media print{html,body{background:#fff;font-size:10pt}.report{max-width:none;margin:0;padding:0;border:0;border-radius:0}.masthead{padding-bottom:10px}.hero{padding:19px 0 15px}h1{font-size:25pt}.section{margin-top:18px}.summary,.risk,.metric{border-radius:4px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.metric{display:block;padding:12px}.metric-value{font-size:19pt}.metric-label{margin-bottom:6px}.metric-note{font-size:8pt}h2{font-size:13pt;break-after:avoid}h3{break-after:avoid}.summary,.risk,.metric,tr{break-inside:avoid}table{font-size:9pt}thead{display:table-header-group}th,td{padding:8px}.footer{margin-top:18px}.sample-note{font-size:9pt}.lead{font-size:12pt}}
+  </style>
+</head>
+<body>
+  <!-- Fictional report starter. Replace example statements and missing values before sharing. -->
+  <main class="report" id="weekly-report">
+    <header class="masthead" id="weekly-header">
+      <span class="wordmark" id="weekly-wordmark">TEAM NOTES</span>
+      <span class="badge" id="weekly-status">작성 예시 · 검토 전</span>
+    </header>
+    <div class="hero" id="weekly-hero">
+      <p class="eyebrow" id="weekly-eyebrow">WEEKLY REPORT</p>
+      <h1 id="weekly-title">제품 운영 주간 보고</h1>
+      <div class="meta" id="weekly-meta">
+        <span id="weekly-period">기간: [시작일] ~ [종료일]</span>
+        <span id="weekly-owner">작성: [팀 · 담당자]</span>
+        <span id="weekly-updated">업데이트: [작성일]</span>
+      </div>
+    </div>
+    <p class="sample-note" id="weekly-example-note">가상의 작성 예시입니다. 공유하기 전에 예시 문구와 [대괄호]를 실제 정보로 바꾸고, 미확인 수치는 그대로 표시하세요.</p>
+    <section class="section summary" id="weekly-summary" aria-labelledby="weekly-summary-title">
+      <h2 id="weekly-summary-title">01 핵심 요약</h2>
+      <p class="lead" id="weekly-summary-lead">핵심 사용 흐름을 정리했습니다. 성과 판단은 지표 확인 후 확정합니다.</p>
+      <p class="muted" id="weekly-summary-detail">이번 주에는 시작 화면과 보고서 작성 흐름을 점검했습니다. 다음 주에는 실제 사용자의 작업 완료 여부를 확인할 예정입니다.</p>
+    </section>
+    <section class="section" id="weekly-results" aria-labelledby="weekly-results-title">
+      <h2 id="weekly-results-title">02 진행 결과</h2>
+      <div class="metrics" id="weekly-metrics">
+        <article class="metric" id="weekly-metric-completed">
+          <p class="metric-label" id="weekly-completed-label">완료한 작업</p>
+          <p class="metric-value" id="weekly-completed-value">[입력]건</p>
+          <p class="metric-note" id="weekly-completed-note">출처: [작업 목록]</p>
+        </article>
+        <article class="metric" id="weekly-metric-feedback">
+          <p class="metric-label" id="weekly-feedback-label">확인한 사용자 의견</p>
+          <p class="metric-value" id="weekly-feedback-value">[입력]건</p>
+          <p class="metric-note" id="weekly-feedback-note">출처: [의견 기록]</p>
+        </article>
+        <article class="metric" id="weekly-metric-quality">
+          <p class="metric-label" id="weekly-quality-label">작업 완료율</p>
+          <p class="metric-value" id="weekly-quality-value">확인 필요</p>
+          <p class="metric-note" id="weekly-quality-note">분모 · 기간 확인 후 입력</p>
+        </article>
+      </div>
+      <table id="weekly-results-table">
+        <caption id="weekly-results-caption">주요 작업별 결과와 확인할 내용</caption>
+        <thead><tr id="weekly-results-head"><th scope="col" id="weekly-col-work">작업</th><th scope="col" id="weekly-col-result">이번 주 결과</th><th scope="col" id="weekly-col-check">다음 확인</th></tr></thead>
+        <tbody>
+          <tr id="weekly-result-onboarding"><th scope="row" id="weekly-work-onboarding">시작 화면</th><td id="weekly-result-onboarding-text">보고서 시작 경로 정리</td><td id="weekly-check-onboarding">첫 문서를 여는 데 걸리는 시간</td></tr>
+          <tr id="weekly-result-editing"><th scope="row" id="weekly-work-editing">편집 흐름</th><td id="weekly-result-editing-text">텍스트 수정과 저장 흐름 점검</td><td id="weekly-check-editing">저장 후 다시 열어 결과 확인</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="section" id="weekly-risks" aria-labelledby="weekly-risks-title">
+      <h2 id="weekly-risks-title">03 위험과 요청 사항</h2>
+      <article class="risk" id="weekly-risk-data">
+        <h3 id="weekly-risk-title">지표 집계 기준 확인이 필요합니다.</h3>
+        <p id="weekly-risk-detail">작업 완료율의 대상과 기간이 아직 정해지지 않았습니다. 기준 확정 전에는 이전 주 대비 개선 여부를 판단하지 않습니다.</p>
+        <p class="muted" id="weekly-risk-owner">요청: [담당자]가 [기한]까지 집계 기준과 원본 자료를 확인</p>
+      </article>
+    </section>
+    <section class="section" id="weekly-next-actions" aria-labelledby="weekly-next-title">
+      <h2 id="weekly-next-title">04 다음 주 실행</h2>
+      <ol class="steps" id="weekly-next-list">
+        <li id="weekly-next-verify">[담당자 · 기한] 지표 정의와 출처를 확인하고 빈 수치를 채웁니다.</li>
+        <li id="weekly-next-observe">[담당자 · 기한] 보고서 작성부터 다시 열기까지 사용자 작업을 관찰합니다.</li>
+        <li id="weekly-next-decide">[담당자 · 기한] 관찰 결과를 근거로 다음 개선 항목을 결정합니다.</li>
+      </ol>
+    </section>
+    <footer class="footer" id="weekly-footer"><span id="weekly-footer-team">[팀 이름] · 내부 검토용</span><span id="weekly-footer-source">관련 자료: [문서 이름 · 출처]</span></footer>
+  </main>
+</body>
+</html>

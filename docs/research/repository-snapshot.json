@@ -1,0 +1,100 @@
+{
+  "observed_date": "2026-09-12",
+  "notes": "Counts are mutable repository signals, not users. Dates refer to the reviewed default-branch commit, not repository updated_at or pushed_at. License details are in the report.",
+  "repositories": [
+    {
+      "repo": "GrapesJS/grapesjs",
+      "stars": 26217,
+      "forks": 4644,
+      "archived": false,
+      "default_branch": "dev",
+      "latest_default_commit": "2bdeda85b82b8b9ceae42fd6558cbbcae5ec2d21",
+      "latest_default_commit_date": "2026-08-25T13:12:51Z",
+      "metadata_url": "https://api.github.com/repos/GrapesJS/grapesjs",
+      "commit_url": "https://github.com/GrapesJS/grapesjs/commit/2bdeda85b82b8b9ceae42fd6558cbbcae5ec2d21"
+    },
+    {
+      "repo": "givanz/VvvebJs",
+      "stars": 8664,
+      "forks": 1835,
+      "archived": false,
+      "default_branch": "master",
+      "latest_default_commit": "1acbab7ebfe3e7b004f1f18c039d26550fc04bd8",
+      "latest_default_commit_date": "2026-07-01T16:32:11Z",
+      "metadata_url": "https://api.github.com/repos/givanz/VvvebJs",
+      "commit_url": "https://github.com/givanz/VvvebJs/commit/1acbab7ebfe3e7b004f1f18c039d26550fc04bd8"
+    },
+    {
+      "repo": "webstudio-is/webstudio",
+      "stars": 8934,
+      "forks": 1599,
+      "archived": false,
+      "default_branch": "main",
+      "latest_default_commit": "649ee3669d54a406ff39d31d09b178bf485815a9",
+      "latest_default_commit_date": "2026-09-11T21:33:09Z",
+      "metadata_url": "https://api.github.com/repos/webstudio-is/webstudio",
+      "commit_url": "https://github.com/webstudio-is/webstudio/commit/649ee3669d54a406ff39d31d09b178bf485815a9"
+    },
+    {
+      "repo": "silexlabs/Silex",
+      "stars": 2962,
+      "forks": 675,
+      "archived": false,
+      "default_branch": "main",
+      "latest_default_commit": "db7c797de7f3681b2843c825a80161bd21265de8",
+      "latest_default_commit_date": "2026-09-11T15:38:18Z",
+      "metadata_url": "https://api.github.com/repos/silexlabs/Silex",
+      "commit_url": "https://github.com/silexlabs/Silex/commit/db7c797de7f3681b2843c825a80161bd21265de8"
+    },
+    {
+      "repo": "deckflow/html-editor",
+      "stars": 0,
+      "forks": 1,
+      "archived": false,
+      "latest_default_commit": "cc1e9a7c61a1e02e50be2a9a4fe86237cafa7a8d",
+      "latest_default_commit_date": "2026-08-15T01:59:32Z",
+      "metadata_url": "https://api.github.com/repos/deckflow/html-editor",
+      "commit_url": "https://github.com/deckflow/html-editor/commit/cc1e9a7c61a1e02e50be2a9a4fe86237cafa7a8d"
+    },
+    {
+      "repo": "mncoleman/html-editor",
+      "stars": 10,
+      "forks": 2,
+      "archived": false,
+      "latest_default_commit": "9d43d6e94af8aef6743e3fe44783f22ef2d661ee",
+      "latest_default_commit_date": "2026-06-15T19:28:11Z",
+      "metadata_url": "https://api.github.com/repos/mncoleman/html-editor",
+      "commit_url": "https://github.com/mncoleman/html-editor/commit/9d43d6e94af8aef6743e3fe44783f22ef2d661ee"
+    },
+    {
+      "repo": "WangHexinyi/framewright",
+      "stars": 3,
+      "forks": 0,
+      "archived": false,
+      "latest_default_commit": "ac0f4c483718dfff01383cf3cf35d4b81e677915",
+      "latest_default_commit_date": "2026-08-01T08:35:32Z",
+      "metadata_url": "https://api.github.com/repos/WangHexinyi/framewright",
+      "commit_url": "https://github.com/WangHexinyi/framewright/commit/ac0f4c483718dfff01383cf3cf35d4b81e677915"
+    },
+    {
+      "repo": "GoogleChromeLabs/ProjectVisBug",
+      "stars": 5769,
+      "forks": 330,
+      "archived": false,
+      "latest_default_commit": "fef96fad0c54547637dd2bbdc326450027a906e7",
+      "latest_default_commit_date": "2026-08-03T01:35:36Z",
+      "metadata_url": "https://api.github.com/repos/GoogleChromeLabs/ProjectVisBug",
+      "commit_url": "https://github.com/GoogleChromeLabs/ProjectVisBug/commit/fef96fad0c54547637dd2bbdc326450027a906e7"
+    },
+    {
+      "repo": "onlook-dev/onlook",
+      "stars": 26718,
+      "forks": 2095,
+      "archived": false,
+      "latest_default_commit": "423e2e924366419e418ee049093872d535eea41a",
+      "latest_default_commit_date": "2026-07-22T02:07:29Z",
+      "metadata_url": "https://api.github.com/repos/onlook-dev/onlook",
+      "commit_url": "https://github.com/onlook-dev/onlook/commit/423e2e924366419e418ee049093872d535eea41a"
+    }
+  ]
+}

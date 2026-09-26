@@ -1,0 +1,93 @@
+{
+  "observedAt": "2026-09-12T05:45:02.701Z",
+  "normal": {
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "visualHeight": 844
+    },
+    "focused": "text-value",
+    "panel": {
+      "x": 70,
+      "y": 120,
+      "width": 320,
+      "height": 724,
+      "clientHeight": 724,
+      "scrollHeight": 1207,
+      "scrollTop": 0
+    },
+    "textarea": {
+      "x": 87,
+      "y": 296,
+      "width": 287,
+      "height": 80.390625,
+      "clientHeight": 78,
+      "scrollHeight": 78,
+      "scrollTop": 0
+    },
+    "canvasInert": true,
+    "activeText": "취향에 맞는 주말을 발견하세요."
+  },
+  "short": {
+    "viewport": {
+      "width": 390,
+      "height": 430,
+      "visualHeight": 430
+    },
+    "focused": "text-value",
+    "panel": {
+      "x": 70,
+      "y": 120,
+      "width": 320,
+      "height": 310,
+      "clientHeight": 310,
+      "scrollHeight": 1207,
+      "scrollTop": 0
+    },
+    "textarea": {
+      "x": 87,
+      "y": 296,
+      "width": 287,
+      "height": 80.390625,
+      "clientHeight": 78,
+      "scrollHeight": 78,
+      "scrollTop": 0
+    },
+    "canvasInert": true,
+    "activeText": "취향에 맞는 주말을 발견하세요."
+  },
+  "afterScroll": {
+    "viewport": {
+      "width": 390,
+      "height": 430,
+      "visualHeight": 430
+    },
+    "focused": "text-value",
+    "panel": {
+      "x": 70,
+      "y": 120,
+      "width": 320,
+      "height": 310,
+      "clientHeight": 310,
+      "scrollHeight": 1207,
+      "scrollTop": 897
+    },
+    "textarea": {
+      "x": 87,
+      "y": -601,
+      "width": 287,
+      "height": 80.390625,
+      "clientHeight": 78,
+      "scrollHeight": 78,
+      "scrollTop": 0
+    },
+    "canvasInert": true,
+    "activeText": "취향에 맞는 주말을 발견하세요."
+  },
+  "escaped": {
+    "focus": "toggle-inspector",
+    "panelHidden": true,
+    "canvasInert": false
+  },
+  "limitation": "Desktop viewport resize only; not a physical mobile or virtual keyboard test."
+}

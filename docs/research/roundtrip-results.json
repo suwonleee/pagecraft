@@ -1,0 +1,194 @@
+{
+  "observedAtUtc": "2026-09-12T05:22:41.204Z",
+  "kind": "synthetic-serializer-probe",
+  "browser": "153.0.8010.36",
+  "competitor": {
+    "url": "https://html.mncoleman.com/",
+    "referenceCommit": "9d43d6e94af8aef6743e3fe44783f22ef2d661ee",
+    "referenceRepository": "https://github.com/mncoleman/html-editor",
+    "scriptHashes": [
+      {
+        "path": "js/file.js",
+        "deployedStatus": 200,
+        "referenceStatus": 200,
+        "deployedSha256": "2176eebe91610acbaed64aba9730b7bc513d0730637d8e864260a96777b1760e",
+        "referenceSha256": "2176eebe91610acbaed64aba9730b7bc513d0730637d8e864260a96777b1760e",
+        "matchesReferenceCommit": true
+      },
+      {
+        "path": "js/state.js",
+        "deployedStatus": 200,
+        "referenceStatus": 200,
+        "deployedSha256": "ce4f4cfc2babc5f7f5012062a7e38171ba5f31d769df7a1cd180588ea3fad5fe",
+        "referenceSha256": "ce4f4cfc2babc5f7f5012062a7e38171ba5f31d769df7a1cd180588ea3fad5fe",
+        "matchesReferenceCommit": true
+      },
+      {
+        "path": "js/canvas.js",
+        "deployedStatus": 200,
+        "referenceStatus": 200,
+        "deployedSha256": "cc3a4fa268510443b8ae341820aa3d2b7db2cbb9b48961b1e5dadfd75d8c7065",
+        "referenceSha256": "cc3a4fa268510443b8ae341820aa3d2b7db2cbb9b48961b1e5dadfd75d8c7065",
+        "matchesReferenceCommit": true
+      },
+      {
+        "path": "js/mode-switch.js",
+        "deployedStatus": 200,
+        "referenceStatus": 200,
+        "deployedSha256": "265625cdc3e1a707932dc5738651ed82b44eb77ae1fb77c75597fd65891e8426",
+        "referenceSha256": "265625cdc3e1a707932dc5738651ed82b44eb77ae1fb77c75597fd65891e8426",
+        "matchesReferenceCommit": true
+      }
+    ]
+  },
+  "pagecraft": {
+    "commit": "374bbdd33827433cbdedb0cdaa7a0bab87173418",
+    "editorSourceSha256": "0f17707a78a65464cb488eccd4295df25a8c3fb9cc18fbe27ef427defed8d8d0",
+    "implementation": "Current working-tree src/editor.ts, direct describeHtml/editHtml API calls."
+  },
+  "methodology": {
+    "competitorImport": "FileOps.importFile(new File([source], filename)); wait for its canvas document to load.",
+    "competitorEdits": "Set each specified DOM leaf textContent, call EditorState.setDirty(true), then FileOps.currentHtml(). No editing UI or OS file save is exercised.",
+    "pagecraftEdits": "Resolve the same element using describeHtml(), then pass the same text replacements to editHtml().",
+    "assertions": "Exact equality with original input plus only the specified text replacements; also compare normalized DOM trees to distinguish source formatting changes from semantic tree changes.",
+    "fixtureSelection": "Four declared synthetic cases: no-op, one leaf edit, two separated edits, implicit tbody. Every declared case is recorded; no retries or selection of favorable output.",
+    "limitations": [
+      "This is not an install, user-experience, full UI, performance, security, or operating-system save benchmark.",
+      "The competitor is a live deployment; recorded script hashes establish which relevant scripts match the pinned source, not the provenance of the entire deployment.",
+      "Pagecraft uses the current local working-tree editor implementation; the source hash is recorded because work may be uncommitted.",
+      "Four fixtures cannot establish general compatibility, superiority, adoption or market demand.",
+      "Different execution environments are intentional: each product serializer receives equivalent content edits through its supported internal model. Timings and memory are not compared."
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "no-op",
+      "description": "Open and serialize without edits.",
+      "source": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='no-op'>\n  <p id='first' data-tone=calm>Alpha text</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+      "edits": [],
+      "expected": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='no-op'>\n  <p id='first' data-tone=calm>Alpha text</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+      "pagecraft": {
+        "exactExpectedSource": true,
+        "actualUtf8Bytes": 383,
+        "expectedUtf8Bytes": 383,
+        "firstDifferenceCharacterOffset": null,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='no-op'>\n  <p id='first' data-tone=calm>Alpha text</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      },
+      "competitor": {
+        "exactExpectedSource": true,
+        "actualUtf8Bytes": 383,
+        "expectedUtf8Bytes": 383,
+        "firstDifferenceCharacterOffset": null,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='no-op'>\n  <p id='first' data-tone=calm>Alpha text</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      }
+    },
+    {
+      "id": "single-text-edit",
+      "description": "Change one leaf text while preserving surrounding source.",
+      "source": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='single-text-edit'>\n  <p id='first' data-tone=calm>Alpha text</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+      "edits": [
+        {
+          "selector": "#first",
+          "tag": "p",
+          "before": "Alpha text",
+          "after": "Updated alpha"
+        }
+      ],
+      "expected": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='single-text-edit'>\n  <p id='first' data-tone=calm>Updated alpha</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+      "pagecraft": {
+        "exactExpectedSource": true,
+        "actualUtf8Bytes": 397,
+        "expectedUtf8Bytes": 397,
+        "firstDifferenceCharacterOffset": null,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='single-text-edit'>\n  <p id='first' data-tone=calm>Updated alpha</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      },
+      "competitor": {
+        "exactExpectedSource": true,
+        "actualUtf8Bytes": 397,
+        "expectedUtf8Bytes": 397,
+        "firstDifferenceCharacterOffset": null,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='single-text-edit'>\n  <p id='first' data-tone=calm>Updated alpha</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      }
+    },
+    {
+      "id": "distant-text-edits",
+      "description": "Change two separated leaf texts with untouched comments, mixed quotes and entities between them.",
+      "source": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='distant-text-edits'>\n  <p id='first' data-tone=calm>Alpha text</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Omega text</p>\n</body>\n</html>\n",
+      "edits": [
+        {
+          "selector": "#first",
+          "tag": "p",
+          "before": "Alpha text",
+          "after": "Updated alpha"
+        },
+        {
+          "selector": "#last",
+          "tag": "p",
+          "before": "Omega text",
+          "after": "Updated omega"
+        }
+      ],
+      "expected": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='distant-text-edits'>\n  <p id='first' data-tone=calm>Updated alpha</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Updated omega</p>\n</body>\n</html>\n",
+      "pagecraft": {
+        "exactExpectedSource": true,
+        "actualUtf8Bytes": 402,
+        "expectedUtf8Bytes": 402,
+        "firstDifferenceCharacterOffset": null,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='distant-text-edits'>\n  <p id='first' data-tone=calm>Updated alpha</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note='two words' title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id='last' class='ending'>Updated omega</p>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      },
+      "competitor": {
+        "exactExpectedSource": false,
+        "actualUtf8Bytes": 402,
+        "expectedUtf8Bytes": 402,
+        "firstDifferenceCharacterOffset": 270,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><meta charset='utf-8'><title>Probe &copy; 2026</title></head>\n<body data-probe='distant-text-edits'>\n  <p id='first' data-tone=calm>Updated alpha</p>\n  <!-- Preserve this comment and the mixed quoting below. -->\n  <aside data-note=\"two words\" title=\"Keep me\">Keep &mdash; middle &copy; text</aside>\n  <p id=\"last\" class=\"ending\">Updated omega</p>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      }
+    },
+    {
+      "id": "implicit-table-body",
+      "description": "Change one table cell where the input omits the optional tbody element.",
+      "source": "<!doctype html>\n<html lang='en'>\n<head><title>Table probe</title></head>\n<body data-probe='implicit-table-body'>\n<table id='table'>\n  <tr><td id='cell' data-role=main>Cell alpha</td><td title='keep'>Keep &copy;</td></tr>\n</table>\n</body>\n</html>\n",
+      "edits": [
+        {
+          "selector": "#cell",
+          "tag": "td",
+          "before": "Cell alpha",
+          "after": "Updated cell"
+        }
+      ],
+      "expected": "<!doctype html>\n<html lang='en'>\n<head><title>Table probe</title></head>\n<body data-probe='implicit-table-body'>\n<table id='table'>\n  <tr><td id='cell' data-role=main>Updated cell</td><td title='keep'>Keep &copy;</td></tr>\n</table>\n</body>\n</html>\n",
+      "pagecraft": {
+        "exactExpectedSource": true,
+        "actualUtf8Bytes": 248,
+        "expectedUtf8Bytes": 248,
+        "firstDifferenceCharacterOffset": null,
+        "actual": "<!doctype html>\n<html lang='en'>\n<head><title>Table probe</title></head>\n<body data-probe='implicit-table-body'>\n<table id='table'>\n  <tr><td id='cell' data-role=main>Updated cell</td><td title='keep'>Keep &copy;</td></tr>\n</table>\n</body>\n</html>\n",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      },
+      "competitor": {
+        "exactExpectedSource": false,
+        "actualUtf8Bytes": 264,
+        "expectedUtf8Bytes": 248,
+        "firstDifferenceCharacterOffset": 2,
+        "actual": "<!DOCTYPE html>\n<html lang=\"en\"><head><title>Table probe</title></head>\n<body data-probe=\"implicit-table-body\">\n<table id=\"table\">\n  <tbody><tr><td id=\"cell\" data-role=\"main\">Updated cell</td><td title=\"keep\">Keep &copy;</td></tr>\n</tbody></table>\n\n\n</body></html>",
+        "normalizedDomMatchesExpected": true,
+        "intendedTextsMatch": true
+      }
+    }
+  ],
+  "pageErrors": [],
+  "completedAtUtc": "2026-09-12T05:22:43.757Z"
+}

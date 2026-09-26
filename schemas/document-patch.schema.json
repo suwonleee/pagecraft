@@ -1,0 +1,445 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pagecraft document patch v1",
+  "description": "Structural JSON shape. The CLI also validates current source hash, target uniqueness, source ranges, style values and byte limits.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "hash",
+    "changes"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "changes": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/change"
+      }
+    },
+    "operations": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "id"
+            ],
+            "properties": {
+              "type": {
+                "const": "delete"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^(?:c\\d{1,9}:)*e\\d+$"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "id",
+              "copyId",
+              "changes"
+            ],
+            "properties": {
+              "type": {
+                "const": "duplicate"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^(?:c\\d{1,9}:)*e\\d+$"
+              },
+              "copyId": {
+                "type": "string",
+                "pattern": "^c\\d{1,9}$"
+              },
+              "changes": {
+                "type": "array",
+                "maxItems": 10000,
+                "items": {
+                  "$ref": "#/$defs/innerChange"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "styles": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "background-color": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "font-size": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "font-weight": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "font-family": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "line-height": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "letter-spacing": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "text-align": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "white-space": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "width": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "height": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "min-height": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "padding": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "padding-top": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "padding-right": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "padding-bottom": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "padding-left": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "margin": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "gap": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-radius": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "display": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "flex-direction": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "justify-content": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "align-items": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "translate": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-top": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-right": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-bottom": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-left": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-color": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-width": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "border-style": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "box-sizing": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "position": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "top": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "right": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "bottom": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "left": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "max-width": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "min-width": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "max-height": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "overflow": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "overflow-x": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "overflow-y": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "opacity": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "box-shadow": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "align-self": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "flex": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "flex-grow": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "flex-shrink": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "flex-basis": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "flex-wrap": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "grid-column": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "grid-row": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "grid-template-columns": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "grid-template-rows": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "object-fit": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "margin-top": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "margin-right": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "margin-bottom": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "margin-left": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "row-gap": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "column-gap": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "vertical-align": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "visibility": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "z-index": {
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(?:c\\d{1,9}:)*e\\d+$"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "text": {
+          "type": "string"
+        },
+        "styles": {
+          "$ref": "#/$defs/styles"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "id"
+          ],
+          "not": {
+            "required": [
+              "target"
+            ]
+          }
+        },
+        {
+          "required": [
+            "target"
+          ],
+          "not": {
+            "required": [
+              "id"
+            ]
+          }
+        }
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "text"
+          ]
+        },
+        {
+          "required": [
+            "styles"
+          ]
+        }
+      ]
+    },
+    "innerChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(?:c\\d{1,9}:)*e\\d+$"
+        },
+        "text": {
+          "type": "string"
+        },
+        "styles": {
+          "$ref": "#/$defs/styles"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "text"
+          ]
+        },
+        {
+          "required": [
+            "styles"
+          ]
+        }
+      ],
+      "required": [
+        "id"
+      ]
+    }
+  }
+}

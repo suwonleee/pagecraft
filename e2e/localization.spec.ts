@@ -68,10 +68,12 @@ for (const locale of [
     await expect(page.locator('#save-state')).not.toHaveAttribute('data-state', 'loading');
     await page.locator('#language').selectOption(locale.code);
     await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
-    await page.evaluate(async () => {
-      await navigator.serviceWorker.ready;
-      if (!navigator.serviceWorker.controller) await new Promise<void>(resolve => navigator.serviceWorker.addEventListener('controllerchange', () => resolve(), { once: true }));
-    });
+    await page.evaluate(() => navigator.serviceWorker.ready.then(() => true));
+    // Language reload can overlap first activation: ready does not imply this
+    // document is controlled, and an already-active worker may not claim again.
+    // Navigate through the active worker before taking the actual origin offline.
+    await page.reload();
+    await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.state)).toBe('activated');
     const port = (server.address() as AddressInfo).port;
     server.closeAllConnections();
     await new Promise<void>(resolve => server.close(() => resolve()));

@@ -1,6 +1,6 @@
 # Contributing to Pagecraft
 
-Use English for commit messages, pull request titles and descriptions, issues, and repository documentation. The editor defaults to English and offers Korean. Put dynamic UI messages through `t` in `public/i18n.js` and add their Korean equivalents to `public/locales-ko.js`. Keep the static shell and both report template languages consistent. Never translate user document contents.
+Use English for commit messages, pull request titles and descriptions, issues, and primary repository documentation. Keep localized README guides in `readmes/`. The editor defaults to English and offers Korean, Simplified Chinese, and Japanese. Put dynamic UI messages through `t` in `public/i18n.js` and add their equivalents to all three `public/locales-*.js` dictionaries. Keep the static shell and all four report template languages consistent. Never translate user document contents.
 
 ## Local checks
 
@@ -45,3 +45,7 @@ Line numbers above illustrate the format; cite the actual lines in your change. 
 ## License
 
 Pagecraft is licensed under the [MIT License](LICENSE). Contributions are accepted under the same terms.
+
+## Translations
+
+Keep the root README in English, with Korean, Simplified Chinese, and Japanese guides in `readmes/`. Update the matching sections when behavior changes. UI translations live in `public/locales-*.js`; preserve all message keys and numbered interpolation placeholders. New built-in samples and reports must keep the original IDs, CSS, and print rules. Never translate imported user documents. Run the localization browser tests and dictionary checks when changing language behavior.

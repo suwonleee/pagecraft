@@ -7,6 +7,8 @@ import { describeDocument, editHtml, previewHtml, EditorError } from './editor.j
 import { sourceHash } from './hash.js';
 
 const publicRoot = fileURLToPath(new URL('../public/', import.meta.url));
+const reportPaths = ['', 'ko/', 'zh-CN/', 'ja/'].flatMap(prefix =>
+  ['weekly-report.html', 'decision-brief.html'].map(file => `/reports/${prefix}${file}`));
 const htmlExtensions = new Set(['.html', '.htm']);
 const mimeTypes: Record<string, string> = {
   '.css': 'text/css; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
@@ -179,11 +181,11 @@ export function createHtmlEditorServer({ root: suppliedRoot }: { root: string })
         response.setHeader('Content-Type', mimeTypes[extension]);
         return response.end(await readFile(actual));
       }
-      if (request.method === 'GET' && ['/reports/weekly-report.html', '/reports/decision-brief.html', '/reports/ko/weekly-report.html', '/reports/ko/decision-brief.html'].includes(url.pathname)) {
+      if (request.method === 'GET' && reportPaths.includes(url.pathname)) {
         response.setHeader('Content-Type', 'text/plain; charset=utf-8');
         return response.end(await readFile(new URL(`../fixtures${url.pathname}`, import.meta.url), 'utf8'));
       }
-      if (request.method === 'GET' && ['/', '/index.html', '/app.js', '/i18n.js', '/locales-ko.js', '/canvas.js', '/snapping.js', '/layers.js', '/workspace.js', '/document-api.js', '/structure.js', '/report-start.js', '/styles.css'].includes(url.pathname)) {
+      if (request.method === 'GET' && ['/', '/index.html', '/app.js', '/i18n.js', '/locales-ko.js', '/locales-zh-CN.js', '/locales-ja.js', '/canvas.js', '/snapping.js', '/layers.js', '/workspace.js', '/document-api.js', '/structure.js', '/report-start.js', '/styles.css'].includes(url.pathname)) {
         const file = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
         response.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'");
         response.setHeader('Content-Type', file.endsWith('.js') ? 'text/javascript; charset=utf-8' : file.endsWith('.css') ? 'text/css; charset=utf-8' : 'text/html; charset=utf-8');

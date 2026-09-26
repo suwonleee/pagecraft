@@ -54,7 +54,7 @@ export function initReportStart({ importFile, browserMode }) {
       request = controller;
       const timeout = setTimeout(() => controller.abort(), 15000);
       try {
-        const response = await fetch(new URL(`./reports/${language === 'ko' ? 'ko/' : ''}${template.file}`, location.href), { signal: controller.signal });
+        const response = await fetch(new URL(`./reports/${language === 'en' ? '' : `${language}/`}${template.file}`, location.href), { signal: controller.signal });
         if (!response.ok) throw new Error(t("Could not read the report template. Try again."));
         const html = await response.text();
         if (controller.signal.aborted || !dialog.open) return;

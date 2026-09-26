@@ -24,7 +24,7 @@ const test = base.extend<{ extensionContext: BrowserContext; extensionWorker: Wo
     await context.addInitScript(() => {
       // Preference belongs only to the app; opaque previews and initial blank tabs have no storage.
       if (window !== window.top || !['http:', 'https:', 'chrome-extension:'].includes(location.protocol)) return;
-      localStorage.setItem('pagecraft-language', 'ko');
+      if (!localStorage.getItem('pagecraft-language')) localStorage.setItem('pagecraft-language', 'ko');
     });
     try { await use(context); }
     finally { await context.close(); await rm(profile, { recursive: true, force: true }); }
@@ -103,3 +103,23 @@ test('opens a bundled report offline and exports a fresh template without requir
   expect(source).not.toContain('data-muse-edit-id');
   expect(errors).toEqual([]);
 });
+
+for (const [locale, title] of [['zh-CN', '更好的报告编辑方式'], ['ja', 'レポート編集をより良くする']] as const) {
+  test(`switches to ${locale} and loads its packaged report offline`, async ({ extensionContext, extensionWorker }) => {
+    const url = await extensionWorker.evaluate(() => (globalThis as ExtensionScope).chrome.runtime.getURL('index.html'));
+    const page = await extensionContext.newPage();
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(url);
+    await expect(page.locator('#save-state')).not.toHaveAttribute('data-state', 'loading');
+    await extensionContext.setOffline(true);
+    await page.locator('#language').selectOption(locale);
+    await expect(page.locator('html')).toHaveAttribute('lang', locale);
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('lang', locale);
+    await page.locator('#welcome-report').click();
+    await page.locator('[data-report-template="decision"]').click();
+    await expect(page.frameLocator('#preview').locator('#decision-title')).toHaveText(title);
+    expect(errors).toEqual([]);
+  });
+}

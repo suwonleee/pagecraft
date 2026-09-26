@@ -4,7 +4,7 @@ const asideExecutable = process.env.PAGECRAFT_ASIDE_PATH;
 
 export default defineConfig({
   testDir: './e2e',
-  testMatch: ['browser-mode.spec.ts', 'english-ui.spec.ts'],
+  testMatch: ['browser-mode.spec.ts', 'english-ui.spec.ts', 'localization.spec.ts'],
   fullyParallel: false,
   workers: 1,
   forbidOnly: true,

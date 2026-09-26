@@ -9,8 +9,8 @@ await mkdir(destination, { recursive: true });
 const assets = ['index.html', 'app.js', 'browser-worker.js', 'styles.css', 'manifest.webmanifest', 'icon.svg'];
 for (const asset of assets) await copyFile(new URL(`web-dist/${asset}`, root), new URL(asset, destination));
 await mkdir(new URL('reports/', destination), { recursive: true });
-await mkdir(new URL('reports/ko/', destination), { recursive: true });
-for (const name of ['weekly-report.html', 'decision-brief.html', 'ko/weekly-report.html', 'ko/decision-brief.html']) await copyFile(new URL(`web-dist/reports/${name}`, root), new URL(`reports/${name}`, destination));
+for (const locale of ['ko', 'zh-CN', 'ja']) await mkdir(new URL(`reports/${locale}/`, destination), { recursive: true });
+for (const name of ['', 'ko/', 'zh-CN/', 'ja/'].flatMap(prefix => ['weekly-report.html', 'decision-brief.html'].map(file => prefix + file))) await copyFile(new URL(`web-dist/reports/${name}`, root), new URL(`reports/${name}`, destination));
 await writeFile(new URL('manifest.json', destination), JSON.stringify({
   manifest_version: 3,
   name: 'Pagecraft',

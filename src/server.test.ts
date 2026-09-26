@@ -30,6 +30,21 @@ describe('local HTML editor API', () => {
     await rm(root, { recursive: true, force: true });
   });
 
+  it('serves every translated dictionary and report in local folder mode', async () => {
+    for (const locale of ['ko', 'zh-CN', 'ja']) {
+      const dictionary = await fetch(`${origin}/locales-${locale}.js`);
+      expect(dictionary.status).toBe(200);
+      expect(dictionary.headers.get('content-type')).toContain('text/javascript');
+      expect(await dictionary.text()).toContain('export const messages');
+      for (const report of ['weekly-report', 'decision-brief']) {
+        const response = await fetch(`${origin}/reports/${locale}/${report}.html`);
+        expect(response.status).toBe(200);
+        expect(await response.text()).toContain(`lang="${locale}"`);
+      }
+    }
+    expect((await fetch(`${origin}/reports/unsupported/weekly-report.html`)).status).toBe(404);
+  });
+
   it('lists files, previews safely, patches source, and backs up the exact original', async () => {
     const list = await (await fetch(`${origin}/api/files`)).json() as { files: { file: string; name: string }[] };
     expect(list.files.map((file: { file: string }) => file.file)).toEqual(['nested/두 번째.htm', 'plan.html']);

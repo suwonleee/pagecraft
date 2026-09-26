@@ -30,7 +30,7 @@ const draft = (id: string, updatedAt = 100): Draft => ({
 test.beforeAll(async () => {
   root = await mkdtemp(join(tmpdir(), 'pagecraft-draft-store-'));
   await writeFile(join(root, 'index.html'), '<!doctype html><title>Draft persistence test</title>');
-  for (const file of ['draft-store.js', 'i18n.js', 'locales-ko.js']) {
+  for (const file of ['draft-store.js', 'i18n.js', 'locales-ko.js', 'locales-zh-CN.js', 'locales-ja.js']) {
     await copyFile(fileURLToPath(new URL(`../public/${file}`, import.meta.url)), join(root, file));
   }
   server = createStaticServer({ root });

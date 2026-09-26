@@ -1,10 +1,12 @@
 # Pagecraft
 
+**English** · [한국어](readmes/README.ko.md) · [简体中文](readmes/README.zh-CN.md) · [日本語](readmes/README.ja.md)
+
 **Your AI made the HTML. Make it yours.**
 
 Open a report, landing page, or static mockup. Fix a headline, adjust the layout, and save ordinary HTML—without rebuilding the page or asking an AI to regenerate it.
 
-Pagecraft is a local-first visual HTML editor with an **English interface**, a **Korean language switch**, and a **file-based CLI for coding agents**. No account, API key, or AI subscription is needed to edit a document.
+Pagecraft is a local-first visual HTML editor with an **English interface** and **Korean, Simplified Chinese, and Japanese language choices**, and a **file-based CLI for coding agents**. No account, API key, or AI subscription is needed to edit a document.
 
 ![Editing an English weekly report in Pagecraft: live canvas, element list, and text and style controls](docs/images/edit-report.png)
 
@@ -86,7 +88,9 @@ npm run serve:web
 
 Open **http://127.0.0.1:4318/**. Choose **Start with a report**, **Try the sample**, or bring your own HTML.
 
-The app starts in English. Use the language menu to switch to **한국어**. Your preference stays in this browser; changing the editor language never translates your document. A language change reloads the editor, so save first or cancel the unsaved-edit prompt.
+The app starts in English. Use the language menu to choose **English**, **한국어**, **简体中文**, or **日本語**. Menus, messages, new report templates, the sample, and the AI writing request follow your choice. Existing HTML is never translated.
+
+The preference is stored locally as `pagecraft-language` in browser storage (`en`, `ko`, `zh-CN`, or `ja`). Each browser profile and site address has its own setting; it does not sync or require server configuration. Missing or unsupported values fall back to English. A language change reloads the editor, so save first or cancel the unsaved-edit prompt. Clearing site data resets the preference. All four languages are bundled for offline use once the app is ready offline, and in the optional extension.
 
 ### Pick the right mode
 

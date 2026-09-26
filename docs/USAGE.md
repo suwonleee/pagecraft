@@ -1,6 +1,6 @@
 # Using Pagecraft
 
-The interface starts in English. Choose **한국어** in the language menu for Korean; the preference is saved in this browser. A language change reloads the editor and asks before discarding unsaved edits. The document itself is never translated. This guide includes Korean labels where helpful.
+The interface starts in English. Choose **English**, **한국어**, **简体中文**, or **日本語** in the language menu; menus, messages, new templates, the sample, and the AI writing request follow the choice. The preference is saved in this browser under `pagecraft-language` (`en`, `ko`, `zh-CN`, or `ja`), separately for each profile and site address. Missing or unsupported values use English. Clearing site data resets it; no server setting or account is needed. A language change reloads the editor and asks before discarding unsaved edits. The document itself is never translated. This guide includes Korean labels where helpful.
 
 ## Your first edit
 

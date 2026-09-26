@@ -1,4 +1,4 @@
-import { t, language, initLanguage, applyLanguage } from './i18n.js';
+import { t, language, dateLocale, initLanguage, applyLanguage } from './i18n.js';
 import { createCanvasView, isTextInput, shortcutLetter, isComposingKey } from './canvas.js';
 import { createLayerList } from './layers.js';
 import { initWorkspace } from './workspace.js';
@@ -137,7 +137,7 @@ function renderDraftList(items) {
     name.title = item.name;
     const time = document.createElement('time');
     time.dateTime = new Date(item.updatedAt).toISOString();
-    time.textContent = new Date(item.updatedAt).toLocaleString(language === 'ko' ? 'ko-KR' : 'en-US');
+    time.textContent = new Date(item.updatedAt).toLocaleString(dateLocale);
     label.append(name, time);
     const recover = document.createElement('button');
     recover.className = 'primary';

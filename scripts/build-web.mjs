@@ -18,9 +18,9 @@ await build({
 const html = (await readFile(new URL('public/index.html', root), 'utf8')).replace('<title>', '<meta name="pagecraft-storage" content="browser">\n  <meta name="theme-color" content="#5b50bd">\n  <link rel="manifest" href="./manifest.webmanifest">\n  <link rel="icon" href="./icon.svg" type="image/svg+xml">\n  <title>');
 await writeFile(new URL('index.html', destination), html);
 await writeFile(new URL('styles.css', destination), await readFile(new URL('public/styles.css', root)));
-const reportFiles = ['weekly-report.html', 'decision-brief.html', 'ko/weekly-report.html', 'ko/decision-brief.html'];
+const reportFiles = ['', 'ko/', 'zh-CN/', 'ja/'].flatMap(prefix => ['weekly-report.html', 'decision-brief.html'].map(file => prefix + file));
 await mkdir(new URL('reports/', destination), { recursive: true });
-await mkdir(new URL('reports/ko/', destination), { recursive: true });
+for (const locale of ['ko', 'zh-CN', 'ja']) await mkdir(new URL(`reports/${locale}/`, destination), { recursive: true });
 for (const name of reportFiles) await writeFile(new URL(`reports/${name}`, destination), await readFile(new URL(`fixtures/reports/${name}`, root)));
 // The installed app uses the shell's paper mark and accent without raster assets.
 await writeFile(new URL('icon.svg', destination), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#5b50bd"/><g fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h7l3 3v13H7z"/><path d="M14 4v3h3M9.5 11.5h5M9.5 15.5h3"/></g></svg>');

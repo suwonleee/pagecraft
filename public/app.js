@@ -548,6 +548,12 @@ function refreshInspector() {
   $('#text-value').value = multiple || node.text === null ? '' : changes[node.id]?.text ?? node.text;
   $('#text-hint').textContent = multiple ? t("Select one element to edit its text.") : node.text === null ? t("Select the text inside this element to edit it.") : t("Changes appear on the canvas as you type.");
   const computed = multiple ? [...selection].map((id) => ({ id, css: frame.contentWindow.getComputedStyle(elementFor(id)) })) : [];
+  // A CSS row follows the text direction: vertical writing swaps its visual axis.
+  const verticalText = /^(vertical|sideways)-/.test(css.writingMode);
+  const mixedDirections = computed.some(({ css: other }) => /^(vertical|sideways)-/.test(other.writingMode) !== verticalText);
+  const direction = $('[data-style="flex-direction"]');
+  direction.querySelector('[value="row"]').textContent = mixedDirections ? t('Row (text direction)') : verticalText ? t('Vertical (row)') : t('Horizontal (row)');
+  direction.querySelector('[value="column"]').textContent = mixedDirections ? t('Column (across text)') : verticalText ? t('Horizontal (column)') : t('Vertical (column)');
   for (const field of styleFields) {
     const property = field.dataset.style;
     const edited = changes[node.id]?.styles?.[property];
@@ -1536,11 +1542,30 @@ window.addEventListener('beforeunload', (event) => {
 });
 
 document.addEventListener('pagecraft-language-request', async (event) => {
-  if (loading || importIntent || operation === 'saving' || !(await allowDiscard())) { $('#language').value = language; return; }
+  const selector = $('#language');
+  const next = event.detail;
+  selector.value = language;
+  if (next === language || loading || importIntent || operation === 'saving' || $('#language-dialog').open) return;
+  finishInline();
+  // A reload also replaces the browser editing session, even when it is clean.
+  // Keep the language choice separate from file replacement, with Cancel focused.
+  if (doc) {
+    const dialog = $('#language-dialog');
+    $('#language-confirm').textContent = dirty() ? t('Discard edits and change language') : t('Change language');
+    const confirmed = await new Promise((resolve) => {
+      const done = (value) => { dialog.close(); resolve(value); };
+      $('#language-confirm').onclick = () => done(true);
+      $('#language-cancel').onclick = () => done(false);
+      dialog.oncancel = (event) => { event.preventDefault(); done(false); };
+      dialog.showModal();
+      $('#language-cancel').focus();
+    });
+    if (!confirmed) { selector.focus(); return; }
+  }
   languageReload = true;
-  if (!applyLanguage(event.detail)) {
+  if (!applyLanguage(next)) {
     languageReload = false;
-    $('#language').value = language;
+    selector.focus();
     notify(t('Allow browser storage to remember your language.'));
   }
 });

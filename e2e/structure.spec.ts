@@ -129,14 +129,14 @@ test('duplicates the edited subtree as a snapshot, then independently edits and 
   await openFile(page, 'duplicate-snapshot.html');
   const preview = page.frameLocator('#preview');
   await selectLayer(page, 'child');
-  await page.getByLabel('선택한 요소의 문구').fill('복제 시점의 제목');
+  await page.getByLabel('선택한 요소의 텍스트').fill('복제 시점의 제목');
   await selectLayer(page, 'card');
   await page.getByRole('button', { name: '선택 요소 복제', exact: true }).click();
   await expect(preview.locator('#card--c1')).toHaveCount(1);
   await expect(preview.locator('#child--c1')).toHaveText('복제 시점의 제목');
   await expect(preview.locator('#description--c1')).toHaveText('카드 설명');
   await selectLayer(page, 'child');
-  await page.getByLabel('선택한 요소의 문구').fill('원본에서만 바꾼 제목');
+  await page.getByLabel('선택한 요소의 텍스트').fill('원본에서만 바꾼 제목');
   await expect(preview.locator('#child--c1')).toHaveText('복제 시점의 제목');
   expect(await readFile(join(root, 'duplicate-snapshot.html'), 'utf8')).toBe(SOURCE);
   await save(page);
@@ -146,7 +146,7 @@ test('duplicates the edited subtree as a snapshot, then independently edits and 
   await expect(preview.locator('#child--c1')).toHaveText('복제 시점의 제목');
 
   await selectLayer(page, 'child--c1');
-  await page.getByLabel('선택한 요소의 문구').fill('복사본에서만 바꾼 제목');
+  await page.getByLabel('선택한 요소의 텍스트').fill('복사본에서만 바꾼 제목');
   await save(page);
   await expect(preview.locator('#child')).toHaveText('원본에서만 바꾼 제목');
   await expect(preview.locator('#child--c1')).toHaveText('복사본에서만 바꾼 제목');
@@ -189,7 +189,7 @@ test('preserves ID selector appearance as the clone baseline without redundant i
   await expect(clone.locator('p')).toHaveCount(1000);
   await expect(clone.locator('p[style]')).toHaveCount(0);
 
-  await page.getByLabel('글자 색상', { exact: true }).fill('#0000ff');
+  await page.getByLabel('텍스트 색상', { exact: true }).fill('#0000ff');
   await expect(clone).toHaveCSS('color', 'rgb(0, 0, 255)');
   await expect(original).toHaveCSS('color', 'rgb(255, 0, 0)');
   await page.locator('#reset-selected').click();
@@ -335,7 +335,7 @@ test('leaves typing shortcuts in text fields and activates duplicate/delete only
   await openFile(page, 'structure-shortcuts.html');
   const preview = page.frameLocator('#preview');
   await preview.locator('#alpha').click();
-  const text = page.getByLabel('선택한 요소의 문구');
+  const text = page.getByLabel('선택한 요소의 텍스트');
   await text.fill('입력 보호');
   await text.press('End');
   await text.press('Backspace');

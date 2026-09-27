@@ -60,10 +60,10 @@ test('edits text, color and spacing, restores history, and persists only source 
   const heading = page.frameLocator('#preview').locator('#heading');
   await expect(heading).toHaveCSS('color', 'rgb(17, 34, 51)');
   await heading.click();
-  await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue('기획서 제목');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue('기획서 제목');
 
-  await page.getByLabel('선택한 요소의 문구').fill('저장되는 기획서');
-  await page.getByLabel('글자 색상', { exact: true }).fill('#7c3aed');
+  await page.getByLabel('선택한 요소의 텍스트').fill('저장되는 기획서');
+  await page.getByLabel('텍스트 색상', { exact: true }).fill('#7c3aed');
   await page.getByLabel('안쪽 여백', { exact: true }).fill('24');
   await expect(heading).toHaveText('저장되는 기획서');
   await expect(heading).toHaveCSS('color', 'rgb(124, 58, 237)');
@@ -109,12 +109,12 @@ test('protects nested markup while allowing child text and disabled-button selec
   await preview.locator('#nested').click();
   await page.getByRole('button', { name: '상위 요소 ↑' }).click();
   await expect(page.locator('#selected-tag')).toHaveText('SECTION');
-  await expect(page.getByLabel('선택한 요소의 문구')).toBeDisabled();
-  await expect(page.locator('#text-hint')).toContainText('내부 문구를 클릭');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toBeDisabled();
+  await expect(page.locator('#text-hint')).toContainText('이 요소 안의 텍스트를 선택');
 
   await preview.locator('#nested').click();
-  await expect(page.getByLabel('선택한 요소의 문구')).toBeEnabled();
-  await page.getByLabel('선택한 요소의 문구').fill('수정한 강조 문구');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toBeEnabled();
+  await page.getByLabel('선택한 요소의 텍스트').fill('수정한 강조 문구');
   await expect(preview.locator('#nested')).toHaveText('수정한 강조 문구');
   await expect(preview.locator('#card p')).toHaveText('상세 설명을 유지합니다.');
 
@@ -123,14 +123,14 @@ test('protects nested markup while allowing child text and disabled-button selec
   expect(buttonBounds).not.toBeNull();
   await page.mouse.click(buttonBounds!.x + buttonBounds!.width / 2, buttonBounds!.y + buttonBounds!.height / 2);
   await expect(page.locator('#selected-tag')).toHaveText('BUTTON');
-  await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue('승인하기');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue('승인하기');
 });
 
 test('keeps external file changes and unsaved edits when save detects a conflict', async ({ page }) => {
   await openFile(page, 'conflict.html');
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('아직 저장하지 않은 문구');
+  await page.getByLabel('선택한 요소의 텍스트').fill('아직 저장하지 않은 문구');
   const externallyChanged = SOURCE.replace('기획서 제목', '다른 프로그램의 변경');
   await writeFile(join(root, 'conflict.html'), externallyChanged, 'utf8');
 
@@ -158,7 +158,7 @@ test('imports an HTML copy, edits and saves it without changing the selected ori
   expect(copiedFile).toMatch(/^imports\/[^/]+\/upload\.html$/);
   const heading = page.frameLocator('#preview').locator('#imported-heading');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('가져와서 저장한 기획서');
+  await page.getByLabel('선택한 요소의 텍스트').fill('가져와서 저장한 기획서');
   await page.getByRole('button', { name: '파일에 저장' }).click();
   await expect(page.locator('#save-state')).toHaveText('파일에 저장됨');
   expect(await readFile(join(root, copiedFile!), 'utf8')).toContain('가져와서 저장한 기획서');
@@ -183,7 +183,7 @@ test('edits directly with Enter, resizes by dragging, and retains the result acr
   const multilineText = '직접 수정한 첫 줄\n둘째 줄';
   await expect(heading).not.toHaveAttribute('contenteditable');
   await expect(heading).toHaveJSProperty('textContent', multilineText);
-  await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue(multilineText);
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue(multilineText);
 
   const initialSize = await heading.evaluate((element) => {
     const style = getComputedStyle(element);
@@ -227,7 +227,7 @@ test('requires an explicit discard decision before switching away from an unsave
   await openFile(page, 'switch.html');
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('전환 전에 보존할 미저장 편집');
+  await page.getByLabel('선택한 요소의 텍스트').fill('전환 전에 보존할 미저장 편집');
   await page.locator('#files button[title="nested.html"]').click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.getByRole('button', { name: '계속 편집', exact: true }).click();

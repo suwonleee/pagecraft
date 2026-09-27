@@ -352,5 +352,31 @@ input.invalid { border-color: var(--danger); background: var(--danger-soft); }
 #report-dialog .report-note { font-size: 11px; margin-bottom: 0; }
 @media (max-width: 500px) { .report-templates { grid-template-columns: 1fr; } .report-template { padding: 14px; } .topbar .actions { min-width: 0; justify-content: flex-end; } }
 
-/* Keep the language choice compact beside the document actions. */
-#language{max-width:88px;min-width:0;padding:6px 4px;font-size:12px;border:1px solid var(--border,#ddd);border-radius:6px;background:transparent;color:inherit}
+/* Keep language switching in its own corner, away from document actions. */
+.language-control { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; padding-left: 10px; border-left: 1px solid var(--border); color: var(--muted); }
+.language-control svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.3; }
+#language { width: 80px; min-width: 80px; height: 30px; padding: 4px; font-size: 12px; line-height: 18px; border-radius: 6px; background: transparent; color: inherit; }
+@media (max-width: 1120px) {
+  .topbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
+  .topbar .brand { grid-row: 1; grid-column: 1; }
+  .language-control { grid-row: 1; grid-column: 2; justify-self: end; padding-left: 0; border-left: 0; }
+  .topbar .document-title { grid-row: 2; grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+  .topbar .actions { grid-row: 3; grid-column: 1 / -1; min-width: 0; flex-wrap: wrap; justify-content: flex-end; }
+}
+@media (min-width: 560px) and (max-width: 1120px) {
+  .topbar { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .topbar .document-title { grid-row: 1; grid-column: 2; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .language-control { grid-column: 3; }
+  .topbar .actions { grid-row: 2; }
+}
+.property-grid small { font-size: 10px; line-height: 1.5; }
+.property-grid .layout-method { grid-column: 1 / -1; }
+/* Reserve the same space for all supported languages, including longer actions.
+   A short viewport or enlarged text can still scroll rather than clip content. */
+#language-dialog { min-height: min(280px, calc(100dvh - 40px)); }
+#language-dialog[open] { display: flex; flex-direction: column; }
+#language-dialog > * { flex-shrink: 0; }
+#language-dialog h2 { min-height: 48px; line-height: 24px; }
+#language-dialog p { margin: 0; }
+#language-dialog .dialog-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); margin-top: auto; padding-top: 16px; }
+#language-dialog button { min-width: 0; min-height: 56px; padding: 8px; line-height: 18px; white-space: normal; overflow-wrap: anywhere; }

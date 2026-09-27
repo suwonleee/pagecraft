@@ -55,10 +55,10 @@ test('keeps a 2,001-node document navigable with a bounded layer DOM and saves w
   await expect(last).toContainText('기획 문구 1999');
   await expect(last).toBeFocused();
   await expect(last).toHaveAttribute('aria-posinset', String(ROWS + 1));
-  await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue('기획 문구 1999');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue('기획 문구 1999');
   expect(await page.locator('#layers .layer').count()).toBeLessThan(80);
 
-  await page.getByLabel('선택한 요소의 문구').fill('마지막 요소를 수정했습니다');
+  await page.getByLabel('선택한 요소의 텍스트').fill('마지막 요소를 수정했습니다');
   await expect(last).toContainText('마지막 요소를 수정했습니다');
   await expect(last).toHaveClass(/dirty/);
   await page.getByLabel('요소 검색').fill('마지막 요소');
@@ -78,7 +78,7 @@ test('keeps a 2,001-node document navigable with a bounded layer DOM and saves w
   expect((await saved).status()).toBe(200);
   await expect(page.locator('#save-state')).toHaveText('파일에 저장됨');
   await expect(preview.locator('html')).toHaveAttribute('data-test-document-identity', 'retained');
-  await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue('마지막 요소를 수정했습니다');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue('마지막 요소를 수정했습니다');
   expect(requests.filter((path) => path === '/api/document' || path.startsWith('/preview/'))).toEqual([]);
   const contents = await readFile(join(root, 'navigation.html'), 'utf8');
   expect(contents).toBe(SOURCE.replace('기획 문구 1999', '마지막 요소를 수정했습니다'));
@@ -95,12 +95,12 @@ test('undo touches only edited preview elements and preserves virtual-list keybo
   await page.getByLabel('요소 검색').fill('기획 문구 0000');
   await expect(page.locator('#layers .layer')).toHaveCount(1);
   await page.locator('#layers .layer').click();
-  await page.getByLabel('선택한 요소의 문구').fill('처음 수정');
+  await page.getByLabel('선택한 요소의 텍스트').fill('처음 수정');
   await page.getByLabel('요소 검색').fill('기획 문구 1999');
   await expect(page.locator('#layers .layer')).toHaveCount(1);
   await expect(page.locator('#layers .layer')).toContainText('기획 문구 1999');
   await page.locator('#layers .layer').click();
-  await page.getByLabel('선택한 요소의 문구').fill('마지막 수정');
+  await page.getByLabel('선택한 요소의 텍스트').fill('마지막 수정');
   await page.getByLabel('요소 검색').fill('');
   await expect(page.locator('#layers .layer.active')).toContainText('마지막 수정');
 
@@ -190,7 +190,7 @@ test('blank clicks avoid whole-document geometry reads until a real marquee drag
     await page.mouse.move(firstRow!.x + firstRow!.width + 1, firstRow!.y + firstRow!.height + 1, { steps: 8 });
     await page.mouse.up();
     await expect(page.locator('#selection-count')).toHaveText('1개 선택');
-    await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue('기획 문구 0000');
+    await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue('기획 문구 0000');
     const geometry = await page.evaluate(() => (window as unknown as GeometryAuditWindow).__pagecraftGeometryAudit.snapshot());
     expect(geometry.unique).toBe(ROWS + 1);
     expect(geometry.lastRow).toBe(1);

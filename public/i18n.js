@@ -46,7 +46,7 @@ export function initLanguage() {
   const selector = document.querySelector('#language');
   selector.value = language;
   selector.addEventListener('change', () => {
-    // Use the editor's existing unsaved-change dialog before reloading its shell.
+    // The editor confirms before closing an open document to reload its shell.
     selector.dispatchEvent(new CustomEvent('pagecraft-language-request', { bubbles: true, detail: selector.value }));
   });
 }

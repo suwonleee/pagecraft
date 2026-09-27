@@ -170,7 +170,7 @@ test('rejects malformed and oversized patches without losing the last valid draf
     return { errors, retained: await store.getDraft(input.id), count: (await store.listDrafts()).length };
   }, draft('recoverable'));
   expect(result.errors).toHaveLength(6);
-  expect(result.errors.every(message => /초안/.test(message))).toBe(true);
+  expect(result.errors.every(message => /임시 보관본/.test(message))).toBe(true);
   expect(result.retained).toEqual(draft('recoverable'));
   expect(result.count).toBe(1);
 });

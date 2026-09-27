@@ -1,6 +1,10 @@
 # Using Pagecraft
 
-The interface starts in English. Choose **English**, **한국어**, **简体中文**, or **日本語** in the language menu; menus, messages, new templates, the sample, and the AI writing request follow the choice. The preference is saved in this browser under `pagecraft-language` (`en`, `ko`, `zh-CN`, or `ja`), separately for each profile and site address. Missing or unsupported values use English. Clearing site data resets it; no server setting or account is needed. A language change reloads the editor and asks before discarding unsaved edits. The document itself is never translated. This guide includes Korean labels where helpful.
+The interface starts in English. Choose **English**, **한국어**, **简体中文**, or **日本語** in the **Editor language** menu. Its accessible name and tooltip use the current language. Menus, messages, new templates, the sample, and the AI writing request follow the choice. The document itself is never translated. This guide includes Korean labels where helpful.
+
+The preference is saved in this browser under `pagecraft-language` (`en`, `ko`, `zh-CN`, or `ja`), separately for each profile and site address. Missing or unsupported values use English. Clearing site data resets it; no server setting or account is needed.
+
+Changing language reloads the editor and closes the current document. A dedicated confirmation appears whenever a document is open, including a saved document. **Cancel** receives focus by default and keeps the document and edits open. Save your file before confirming.
 
 ## Your first edit
 
@@ -223,7 +227,7 @@ Local-server backups are not automatically deleted. To restore one, stop the ser
 ## Recovering unsaved browser edits
 
 1. Edit an imported or directly opened HTML file. Wait for **Temporarily stored in this browser** (이 브라우저에 임시 보관됨).
-2. After reloading the app, select **Recover drafts** (임시 보관본 N개 복구), then **Restore** (복구) beside the desired name and time. During editing, the same list opens with **Recovery list** (복구 목록).
+2. After reloading the app, select **Recover drafts** (임시 보관본 N개 복구), then **Restore** (복구) beside the desired name and time. During editing, the same list opens with **Recover drafts** (임시 보관본 복구).
 3. Continue editing the `*.recovered.html` copy and download it to keep a file. Recovery does not retain a file handle or the previous undo history; new edits can be undone.
 
 Drafts are local safety copies, separate from file saving and previous-original backups. They are written after approximately one second of idle editing, or after five seconds of continuous non-composing edits. Dragging and IME composition defer storage until the interaction finishes. An immediate browser/process crash before storage completes can lose the newest edits; this is not a guaranteed unload save.

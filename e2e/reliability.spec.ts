@@ -32,7 +32,7 @@ test.afterAll(async () => {
 
 test('locks edits during a slow save, retains the view and selection, and rebases source IDs for the next save', async ({ page }) => {
   const preview = page.frameLocator('#preview');
-  const field = page.getByLabel('선택한 요소의 문구');
+  const field = page.getByLabel('선택한 요소의 텍스트');
   await preview.locator('#heading').click();
   await field.fill('원본보다 길어진 기획서 제목');
   await preview.locator('#description').click();
@@ -49,7 +49,7 @@ test('locks edits during a slow save, retains the view and selection, and rebase
   await page.keyboard.press('Control+s');
   await expect(page.locator('#save-state')).toHaveText('저장 중…');
   await expect(field).toBeDisabled();
-  await expect(page.getByLabel('글자 크기', { exact: true })).toBeDisabled();
+  await expect(page.getByLabel('글꼴 크기', { exact: true })).toBeDisabled();
   await expect(page.locator('#canvas')).toHaveAttribute('inert', '');
   await expect(page.locator('#save')).toBeDisabled();
   release();
@@ -69,7 +69,7 @@ test('locks edits during a slow save, retains the view and selection, and rebase
 test('keeps unsaved edits and a persistent error after save failure, then retries successfully', async ({ page }) => {
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('실패해도 남는 수정');
+  await page.getByLabel('선택한 요소의 텍스트').fill('실패해도 남는 수정');
   await page.route('**/api/save', (route) => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: '시험 서버 일시 중단' }) }), { times: 1 });
   await page.getByRole('button', { name: '파일에 저장' }).click();
   await expect(page.locator('#operation-error')).toBeVisible();
@@ -78,7 +78,7 @@ test('keeps unsaved edits and a persistent error after save failure, then retrie
   await expect(page.locator('#save-state')).toHaveText('1개 요소 · 저장 전');
   await expect(heading).toHaveText('실패해도 남는 수정');
   expect(await readFile(join(root, 'current.html'), 'utf8')).toBe(SOURCE);
-  await expect(page.getByLabel('선택한 요소의 문구')).toBeEnabled();
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toBeEnabled();
 
   await page.locator('#retry-operation').click();
   await expect(page.locator('#save-state')).toHaveText('파일에 저장됨');
@@ -101,7 +101,7 @@ test('finishes an active drag before saving so Escape cannot restore stale sourc
   await expect(heading).toHaveCSS('translate', translate);
   await expect(page.locator('#save-state')).toHaveText('파일에 저장됨');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('드래그 저장 이후의 편집');
+  await page.getByLabel('선택한 요소의 텍스트').fill('드래그 저장 이후의 편집');
   await page.keyboard.press('Control+s');
   await expect(page.locator('#save-state')).toHaveText('파일에 저장됨');
   const contents = await readFile(join(root, 'current.html'), 'utf8');
@@ -112,7 +112,7 @@ test('finishes an active drag before saving so Escape cannot restore stale sourc
 test('preserves the current edited document when the next HTML preview fails to load', async ({ page }) => {
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('열기 실패에도 유지할 내용');
+  await page.getByLabel('선택한 요소의 텍스트').fill('열기 실패에도 유지할 내용');
   await page.route('**/preview/other.html*', (route) => route.fulfill({ status: 500, contentType: 'application/json', body: '{"error":"preview unavailable"}' }));
   await page.locator('#files button[title="other.html"]').click();
   await page.getByRole('button', { name: '변경 버리고 열기', exact: true }).click();

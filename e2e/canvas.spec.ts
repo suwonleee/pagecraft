@@ -285,10 +285,10 @@ test('the inspector shows values a person could type, not the browser\'s resolve
   // An element that does have one shows a hex colour, not an rgb() triple.
   await page.frameLocator('#preview').locator('#other').click();
   await expect(page.locator('#selected-tag')).toHaveText('SECTION');
-  await expect(page.getByLabel('글자 색상', { exact: true })).toHaveValue(/^#[0-9a-f]{6}$/);
+  await expect(page.getByLabel('텍스트 색상', { exact: true })).toHaveValue(/^#[0-9a-f]{6}$/);
   await expect(page.getByLabel('배경 색상', { exact: true })).toHaveValue('#f3f4f6');
   // Lengths keep at most two decimals; a keyword such as `normal` passes through.
-  for (const field of ['너비', '높이', '줄 높이']) {
+  for (const field of ['너비', '높이', '줄 간격']) {
     const value = await page.getByLabel(field, { exact: true }).inputValue();
     expect(value, `${field} keeps at most two decimals`).toMatch(/^(?:-?\d+(?:\.\d{1,2})?px|[a-z-]+)$/);
   }
@@ -409,7 +409,7 @@ test('Space remains a text character in both the inspector and direct text editi
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
   const before = await bounds(page.locator('#preview'));
-  const textarea = page.getByLabel('선택한 요소의 문구');
+  const textarea = page.getByLabel('선택한 요소의 텍스트');
   await textarea.fill('두');
   await textarea.press('End');
   await page.keyboard.press('Space');

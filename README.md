@@ -88,9 +88,9 @@ npm run serve:web
 
 Open **http://127.0.0.1:4318/**. Choose **Start with a report**, **Try the sample**, or bring your own HTML.
 
-The app starts in English. Use the language menu to choose **English**, **한국어**, **简体中文**, or **日本語**. Menus, messages, new report templates, the sample, and the AI writing request follow your choice. Existing HTML is never translated.
+The app starts in English. Use the **Editor language** menu (its accessible name and tooltip follow your current language) to choose **English**, **한국어**, **简体中文**, or **日本語**. Menus, messages, new report templates, the sample, and the AI writing request follow your choice. Existing HTML is never translated.
 
-The preference is stored locally as `pagecraft-language` in browser storage (`en`, `ko`, `zh-CN`, or `ja`). Each browser profile and site address has its own setting; it does not sync or require server configuration. Missing or unsupported values fall back to English. A language change reloads the editor, so save first or cancel the unsaved-edit prompt. Clearing site data resets the preference. All four languages are bundled for offline use once the app is ready offline, and in the optional extension.
+The preference is stored locally as `pagecraft-language` in browser storage (`en`, `ko`, `zh-CN`, or `ja`). Each browser profile and site address has its own setting; it does not sync or require server configuration. Missing or unsupported values fall back to English. A language change reloads the editor and closes the current document. Whenever a document is open, even if already saved, a dedicated confirmation explains this. **Cancel** receives focus by default and keeps your document and edits open. Save your file before confirming the change. Clearing site data resets the preference. All four languages are bundled for offline use once the app is ready offline, and in the optional extension.
 
 ### Pick the right mode
 

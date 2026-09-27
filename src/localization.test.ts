@@ -23,6 +23,18 @@ function ids(source: string) {
 
 describe('localization assets', () => {
   for (const locale of locales) {
+    it(`${locale} translates every accessible name and tooltip in the editor shell`, async () => {
+      const source = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+      const labels = new Set<string>();
+      function visit(node: DefaultTreeAdapterTypes.Node) {
+        for (const attr of ('attrs' in node ? node.attrs : [])) {
+          if (['aria-label', 'title'].includes(attr.name)) labels.add(attr.value);
+        }
+        for (const child of ('childNodes' in node ? node.childNodes : [])) visit(child);
+      }
+      visit(parse(source));
+      for (const label of labels) expect(dictionaries[locale], label).toHaveProperty(label);
+    });
     it(`${locale} covers messages without losing interpolation placeholders`, () => {
       const messages = dictionaries[locale]!;
       expect(Object.keys(messages).sort()).toEqual(Object.keys(dictionaries.ko!).sort());

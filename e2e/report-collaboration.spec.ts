@@ -43,7 +43,7 @@ async function inspect() {
 async function editText(page: Page, htmlId: string, text: string) {
   const element = page.frameLocator('#preview').locator(`#${htmlId}`);
   await element.click();
-  await page.getByLabel('선택한 요소의 문구').fill(text);
+  await page.getByLabel('선택한 요소의 텍스트').fill(text);
   await expect(element).toHaveText(text);
 }
 

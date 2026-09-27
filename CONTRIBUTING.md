@@ -48,4 +48,6 @@ Pagecraft is licensed under the [MIT License](LICENSE). Contributions are accept
 
 ## Translations
 
+Follow the [localization terminology and interaction policy](docs/LOCALIZATION.md) when choosing labels, help text, and language-switch messages.
+
 Keep the root README in English, with Korean, Simplified Chinese, and Japanese guides in `readmes/`. Update the matching sections when behavior changes. UI translations live in `public/locales-*.js`; preserve all message keys and numbered interpolation placeholders. New built-in samples and reports must keep the original IDs, CSS, and print rules. Never translate imported user documents. Run the localization browser tests and dictionary checks when changing language behavior.

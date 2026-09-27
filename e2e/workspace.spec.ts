@@ -35,7 +35,7 @@ test('desktop panels collapse, restore view preferences, and keep document edits
   await open(page);
   const before = await canvasWidth(page);
   await page.frameLocator('#preview').locator('#heading').click();
-  await page.getByLabel('선택한 요소의 문구').fill('저장 전 편집');
+  await page.getByLabel('선택한 요소의 텍스트').fill('저장 전 편집');
   await expect(page.locator('#save-state')).toContainText('저장 전');
   await page.getByRole('button', { name: '파일·요소', exact: true }).click();
   await page.getByRole('button', { name: '속성', exact: true }).click();
@@ -95,7 +95,7 @@ test('canvas focus mode restores the previous panels without changing edits or s
   await open(page);
   await page.locator('#toggle-files').click();
   await page.frameLocator('#preview').locator('#heading').click();
-  await page.getByLabel('선택한 요소의 문구').fill('집중 모드에서 유지할 편집');
+  await page.getByLabel('선택한 요소의 텍스트').fill('집중 모드에서 유지할 편집');
   const preference = await page.evaluate(() => localStorage.getItem('pagecraft.workspace.v1'));
   const before = await canvasWidth(page);
   const focus = page.getByRole('button', { name: '캔버스 집중 모드', exact: true });
@@ -243,7 +243,7 @@ test('narrow panels open one at a time, close with Escape, and reveal selected e
   await expect(page.locator('.canvas-section')).not.toHaveAttribute('inert');
   await expect(page.locator('#selection-box')).toBeVisible();
   await page.locator('#toggle-inspector').click();
-  await expect(page.getByLabel('선택한 요소의 문구')).toHaveValue('편집할 제목');
+  await expect(page.getByLabel('선택한 요소의 텍스트')).toHaveValue('편집할 제목');
   await page.keyboard.press('Escape');
   await expect(page.locator('#inspector-panel')).toBeHidden();
   await expect(page.locator('#toggle-inspector')).toBeFocused();

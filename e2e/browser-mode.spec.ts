@@ -104,7 +104,7 @@ async function dropFiles(target: Locator, files: DroppedFile[]) {
 async function editHeading(page: Page, text: string) {
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill(text);
+  await page.getByLabel('선택한 요소의 텍스트').fill(text);
   await expect(heading).toHaveText(text);
   await expect(page.locator('#save')).toBeEnabled();
 }
@@ -210,7 +210,7 @@ test('onboarding: edits a bundled sample without personal files, then downloads 
   expect(await page.locator('#file-input').evaluate(input => (input as HTMLInputElement).files?.length)).toBe(0);
   const heading = page.frameLocator('#preview').locator('#hero-title');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('My first Pagecraft edit');
+  await page.getByLabel('선택한 요소의 텍스트').fill('My first Pagecraft edit');
   await expect(heading).toHaveText('My first Pagecraft edit');
   const pendingDownload = page.waitForEvent('download');
   await page.locator('#save').click();
@@ -233,11 +233,11 @@ test('inspector shows custom and mixed values without changing the document', as
   await page.locator('#try-sample').click();
   const heading = page.frameLocator('#preview').locator('#hero-title');
   const intro = page.frameLocator('#preview').locator('.intro');
-  const weight = page.getByLabel('글자 굵기', { exact: true });
+  const weight = page.getByLabel('글꼴 굵기', { exact: true });
   await heading.click();
   await expect(weight).toHaveValue('650');
   await expect(weight.locator('option:checked')).toHaveText('현재 · 650');
-  await expect(page.getByLabel('글자 정렬', { exact: true })).toHaveValue('start');
+  await expect(page.getByLabel('텍스트 정렬', { exact: true })).toHaveValue('start');
   await expect(page.locator('#save')).toBeDisabled();
   await intro.click({ modifiers: ['Shift'] });
   await expect(page.locator('#selection-count')).toHaveText('2개 선택');
@@ -291,7 +291,7 @@ test('copy export status persists and distinguishes later edits without clearing
   await page.locator('#undo').click();
   await expect(page.frameLocator('#preview').locator('h1')).toHaveCount(1);
   await expect(page.frameLocator('#preview').locator('#heading')).toHaveText('Exported revision');
-  await page.getByLabel('선택한 요소의 문구').fill('A later edit');
+  await page.getByLabel('선택한 요소의 텍스트').fill('A later edit');
   await expect(page.locator('#save-state')).toContainText('다운로드 요청 후 변경');
   await expect(page.locator('#save')).toBeEnabled();
   await page.locator('#reload').click();
@@ -316,7 +316,7 @@ test('recovery: restores Korean text and structural edits as a downloadable copy
   await importCopy(page);
   await editHeading(page, '복구할 한글 기획서');
   await page.locator('#duplicate-selection').click();
-  await page.getByLabel('선택한 요소의 문구').fill('복구할 두 번째 제목');
+  await page.getByLabel('선택한 요소의 텍스트').fill('복구할 두 번째 제목');
   await waitForDraft(page);
   await reloadWithDraft(page);
   await page.locator('#welcome-recovery').click();
@@ -424,7 +424,7 @@ test('recovery: canceled inline revisions cannot hide different later text from 
   await importCopy(page);
   const heading = page.frameLocator('#preview').locator('#heading');
   await heading.click();
-  await page.getByLabel('글자 색상', { exact: true }).fill('#6d4c9b');
+  await page.getByLabel('텍스트 색상', { exact: true }).fill('#6d4c9b');
   await waitForDraft(page);
   await heading.dblclick();
   await page.keyboard.insertText('Canceled text A');
@@ -580,7 +580,7 @@ test('imports, edits and duplicates an HTML copy, then downloads source-preservi
   await importCopy(page);
   await expect(page.frameLocator('#preview').locator('body')).not.toHaveAttribute('data-fixture-script', 'executed');
   await editHeading(page, 'Edited in the browser');
-  await page.getByLabel('글자 색상', { exact: true }).fill('#7c3aed');
+  await page.getByLabel('텍스트 색상', { exact: true }).fill('#7c3aed');
   await page.locator('#duplicate-selection').click();
   await expect(page.frameLocator('#preview').locator('h1')).toHaveCount(2);
   const pendingDownload = page.waitForEvent('download');

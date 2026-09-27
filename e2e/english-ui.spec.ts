@@ -65,7 +65,7 @@ test('English first run edits, downloads, and reopens a report without changing 
 test('language choice persists and cancelling a switch preserves unsaved document text', async ({ page }) => {
   await page.goto(baseURL);
   await expect(page.locator('#save-state')).not.toHaveAttribute('data-state', 'loading');
-  await page.getByLabel('Language', { exact: true }).selectOption('ko');
+  await page.getByLabel('Editor language', { exact: true }).selectOption('ko');
   await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
@@ -74,14 +74,19 @@ test('language choice persists and cancelling a switch preserves unsaved documen
   const report = page.frameLocator('#preview');
   await expect(report.locator('#decision-title')).toHaveText('보고서 편집 도입 검토');
   await report.locator('#decision-title').click();
-  await page.getByLabel('선택한 요소의 문구', { exact: true }).fill('Keep my unsaved document — 한글도 보존');
-  await page.getByLabel('Language', { exact: true }).selectOption('en');
-  await page.locator('#discard-cancel').click();
+  await page.getByLabel('선택한 요소의 텍스트', { exact: true }).fill('Keep my unsaved document — 한글도 보존');
+  await page.getByLabel('편집기 언어', { exact: true }).selectOption('en');
+  await expect(page.locator('#language-dialog')).toContainText('문서 내용은 번역되지 않습니다.');
+  await expect(page.locator('#language-confirm')).toHaveText('변경 사항 버리고 언어 변경');
+  await expect(page.locator('#language-cancel')).toBeFocused();
+  await expect(page.locator('#discard-dialog')).not.toBeVisible();
+  await page.locator('#language-cancel').click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
   await expect(page.locator('#language')).toHaveValue('ko');
   await expect(report.locator('#decision-title')).toHaveText('Keep my unsaved document — 한글도 보존');
-  await page.getByLabel('Language', { exact: true }).selectOption('en');
-  await page.locator('#discard-confirm').click();
+  await expect(page.getByLabel('편집기 언어', { exact: true })).toBeFocused();
+  await page.getByLabel('편집기 언어', { exact: true }).selectOption('en');
+  await page.locator('#language-confirm').click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.getByRole('button', { name: 'Start with a report', exact: true })).toBeVisible();
 });
@@ -95,7 +100,7 @@ test('English shell works on a narrow screen and stays usable when preferences a
   await page.goto(baseURL);
   await expect(page.getByRole('button', { name: 'Start with a report', exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(391);
-  await page.getByLabel('Language', { exact: true }).selectOption('ko');
+  await page.getByLabel('Editor language', { exact: true }).selectOption('ko');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('#toast')).toHaveText('Allow browser storage to remember your language.');
 });

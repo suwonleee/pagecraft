@@ -47,7 +47,7 @@ async function edit(page: Page, context: EditingContext, text: string) {
     return heading;
   }
   await heading.click();
-  const field = page.getByLabel('선택한 요소의 문구');
+  const field = page.getByLabel('선택한 요소의 텍스트');
   await field.fill(text);
   return field;
 }

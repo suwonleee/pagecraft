@@ -64,7 +64,7 @@ test('opens an extension tab and edits an HTML copy offline without changing the
   await expect(heading).toHaveText('Original heading');
   await expect(page.frameLocator('#preview').locator('body')).not.toHaveAttribute('data-executed', 'yes');
   await heading.click();
-  await page.getByLabel('선택한 요소의 문구').fill('Edited from the extension');
+  await page.getByLabel('선택한 요소의 텍스트').fill('Edited from the extension');
   await expect(heading).toHaveText('Edited from the extension');
   const pendingDownload = page.waitForEvent('download');
   await page.locator('#save').click();

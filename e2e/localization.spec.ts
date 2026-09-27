@@ -44,7 +44,7 @@ for (const locale of [
     await page.locator('#text-value').press('Tab');
     await expect(preview.locator('#weekly-title')).toHaveText(text);
     await page.locator('#language').selectOption('en');
-    await page.locator('#discard-cancel').click();
+    await page.locator('#language-cancel').click();
     await expect(page.locator('#language')).toHaveValue(locale.code);
     await expect(preview.locator('#weekly-title')).toHaveText(text);
     const pending = page.waitForEvent('download');
@@ -55,7 +55,7 @@ for (const locale of [
     expect(html).toContain('@media print');
     expect(html).not.toContain('data-muse-edit-id');
     await page.locator('#language').selectOption('en');
-    await page.locator('#discard-confirm').click();
+    await page.locator('#language-confirm').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await page.locator('#file-input').setInputFiles({ name: 'saved.html', mimeType: 'text/html', buffer: Buffer.from(html) });
     await expect(preview.locator('#weekly-title')).toHaveText(text);
@@ -123,4 +123,76 @@ test('unknown stored language falls back to English and can be replaced', async 
   await expect(page.locator('#save-state')).not.toHaveAttribute('data-state', 'loading');
   await page.locator('#language').selectOption('ja');
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+});
+
+for (const locale of [
+  { code: 'en', label: 'Editor language', change: 'Change language', cancel: 'Cancel', padding: 'Space inside the border', flex: 'Row or column (flex)' },
+  { code: 'ko', label: '편집기 언어', change: '언어 변경', cancel: '취소', padding: '테두리 안쪽의 여백', flex: '가로·세로 배치 (flex)' },
+  { code: 'zh-CN', label: '编辑器语言', change: '更改语言', cancel: '取消', padding: '边框内侧的间距', flex: '按行或列排列（flex）' },
+  { code: 'ja', label: 'エディターの言語', change: '言語を変更', cancel: 'キャンセル', padding: '境界線の内側の余白', flex: '横・縦に並べる（flex）' },
+]) {
+  test(`${locale.code} explains language changes for clean documents and preserves the file on Escape`, async ({ page }) => {
+    await page.goto(baseURL);
+    await expect(page.locator('#save-state')).not.toHaveAttribute('data-state', 'loading');
+    await page.locator('#language').selectOption(locale.code);
+    const language = page.getByRole('combobox', { name: locale.label, exact: true });
+    await expect(language).toHaveValue(locale.code);
+    for (const code of ['en', 'ko', 'zh-CN', 'ja']) {
+      await expect(language.locator(`option[value="${code}"]`)).toHaveAttribute('lang', code);
+    }
+    const source = '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>My document</title></head><body><h1 id="title">My unchanged document · 한국어 · 中文 · 日本語</h1></body></html>';
+    await page.locator('#file-input').setInputFiles({ name: 'original.html', mimeType: 'text/html', buffer: Buffer.from(source) });
+    const heading = page.frameLocator('#preview').locator('#title');
+    await expect(heading).toHaveText('My unchanged document · 한국어 · 中文 · 日本語');
+    await expect(page.locator('#save')).toBeDisabled();
+    await language.selectOption(locale.code === 'en' ? 'ko' : 'en');
+    await expect(page.locator('#language-dialog')).toBeVisible();
+    await expect(page.locator('#language-confirm')).toHaveText(locale.change);
+    await expect(page.locator('#language-cancel')).toHaveText(locale.cancel);
+    await expect(page.locator('#language-cancel')).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(language).toBeFocused();
+    await expect(language).toHaveValue(locale.code);
+    await expect(heading).toHaveText('My unchanged document · 한국어 · 中文 · 日本語');
+    await expect(page.locator('#save')).toBeDisabled();
+    await heading.click();
+    await expect(page.locator('[data-style="padding"]')).toHaveAccessibleDescription(locale.padding);
+    await expect(page.locator('[data-style="display"] option[value="flex"]')).toHaveText(locale.flex);
+    await page.locator('[data-style="display"]').selectOption('flex');
+    await page.locator('[data-style="flex-direction"]').selectOption('column');
+    await expect(heading).toHaveCSS('display', 'flex');
+    await expect(heading).toHaveCSS('flex-direction', 'column');
+    await page.locator('#undo').click();
+    await page.locator('#undo').click();
+    await expect(page.locator('#save')).toBeDisabled();
+    await expect(heading).toHaveCSS('display', 'block');
+    await expect(heading).toHaveText('My unchanged document · 한국어 · 中文 · 日本語');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(language).toBeInViewport();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+    await language.selectOption(locale.code === 'en' ? 'ko' : 'en');
+    await expect(page.locator('#language-cancel')).toBeInViewport();
+    await expect(page.locator('#language-confirm')).toBeInViewport();
+    await page.locator('#language-confirm').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', locale.code === 'en' ? 'ko' : 'en');
+    await expect(page.locator('#welcome-report')).toBeVisible();
+  });
+}
+
+test('layout direction labels follow vertical writing and mixed selections without editing the document', async ({ page }) => {
+  await page.goto(baseURL);
+  const source = '<!doctype html><html><body><div id="vertical" style="display:flex;writing-mode:vertical-rl">Vertical text</div><div id="horizontal" style="display:flex">Horizontal text</div></body></html>';
+  await page.locator('#file-input').setInputFiles({ name: 'writing-modes.html', mimeType: 'text/html', buffer: Buffer.from(source) });
+  const preview = page.frameLocator('#preview');
+  const direction = page.getByRole('combobox', { name: 'Layout direction', exact: true });
+  await preview.locator('#vertical').click();
+  await expect(direction.locator('[value="row"]')).toHaveText('Vertical (row)');
+  await expect(direction.locator('[value="column"]')).toHaveText('Horizontal (column)');
+  await preview.locator('#horizontal').click({ modifiers: ['Shift'] });
+  await expect(direction.locator('[value="row"]')).toHaveText('Row (text direction)');
+  await expect(direction.locator('[value="column"]')).toHaveText('Column (across text)');
+  await preview.locator('#horizontal').click();
+  await expect(direction.locator('[value="row"]')).toHaveText('Horizontal (row)');
+  await expect(direction.locator('[value="column"]')).toHaveText('Vertical (column)');
+  await expect(page.locator('#save')).toBeDisabled();
 });
